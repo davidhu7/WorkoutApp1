@@ -1,5 +1,6 @@
 <resources>
     <string name="appName">Workout app</string>
-    <string name="startButton">Click here to begin</string>
+    <string name="newButton">New Workout</string>
+    <string name="saveButton">Saved</string>
     <string name="companyName">ES4</string>
 </resources>

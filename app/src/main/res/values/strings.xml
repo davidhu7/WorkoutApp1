@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">WorkoutApp1</string>
+    <string name="appName">Workout app</string>
+    <string name="startButton">Click here to begin</string>
+    <string name="companyName">ES4</string>
 </resources>

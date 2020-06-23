@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openMainScreen() {
-        Intent intentOpenMainScreen = new Intent(this, MainScreen.class);
+        Intent intentOpenMainScreen = new Intent(this, SavedWorkoutsActivity.class);
         startActivity(intentOpenMainScreen);
     }
 }

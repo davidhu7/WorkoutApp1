@@ -3,4 +3,10 @@
     <string name="newButton">New Workout</string>
     <string name="saveButton">Saved</string>
     <string name="companyName">ES4</string>
+    <string name="workTimeText">Work Time</string>
+    <string name="restTimeText">Rest Time</string>
+    <string name="cyclesText">Cycles</string>
+    <string name="setsText">Sets</string>
+    <string name="cooldownTimeText">Cooldown Time</string>
+    <string name="startWorkout">Start</string>
 </resources>

@@ -21,11 +21,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 openMainScreen();
             }
+
+
         });
     }
 
     public void openMainScreen() {
-        Intent intentOpenMainScreen = new Intent(this, SavedWorkoutsActivity.class);
+        Intent intentOpenMainScreen = new Intent(this, NewWorkoutActivity.class);
         startActivity(intentOpenMainScreen);
     }
 }

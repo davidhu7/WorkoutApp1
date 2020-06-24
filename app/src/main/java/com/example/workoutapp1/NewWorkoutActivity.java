@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,7 +32,6 @@ public class NewWorkoutActivity extends AppCompatActivity {
     private int setsInt;
     private int cooldownInt;
     private Button startButton;
-    public Workout myworkout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,19 +39,19 @@ public class NewWorkoutActivity extends AppCompatActivity {
         setContentView(R.layout.new_workouts);
 
         workTime = findViewById(R.id.workNum);
-        workInt = Integer.parseInt(workTime.getText().toString());
+        workTime.addTextChangedListener(checkInput);
 
         restTime = findViewById(R.id.restNum);
-        restInt = Integer.parseInt(restTime.getText().toString());
+        restTime.addTextChangedListener(checkInput);
 
         cycleTime = findViewById(R.id.cycleNum);
-        cycleInt = Integer.parseInt(cycleTime.getText().toString());
+        cycleTime.addTextChangedListener(checkInput);
 
         setsTime = findViewById(R.id.setsNum);
-        setsInt = Integer.parseInt(setsTime.getText().toString());
+        setsTime.addTextChangedListener(checkInput);
 
         cooldownTime = findViewById(R.id.cooldownNum);
-        cooldownInt = Integer.parseInt(cooldownTime.getText().toString());
+        cooldownTime.addTextChangedListener(checkInput);
 
         // totalTime = cooldownInt + setsInt + cycleInt + restInt + workInt;
 
@@ -68,10 +69,42 @@ public class NewWorkoutActivity extends AppCompatActivity {
 
     }
 
+    private TextWatcher checkInput = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String testWorkout = workTime.getText().toString().trim();
+            String testRestTime = restTime.getText().toString().trim();
+            String testCycle = cycleTime.getText().toString().trim();
+            String testSetsTime = setsTime.getText().toString().trim();
+            String testCooldown = cooldownTime.getText().toString().trim();
+
+            startButton.setEnabled(!testWorkout.isEmpty() && !testRestTime.isEmpty()
+                    && !testCycle.isEmpty() && !testSetsTime.isEmpty() && !testCooldown.isEmpty());
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
     public void openWorkOut(){
         Intent intentOpenWorkout = new Intent(this, WorkoutActivity.class);
+
+        workInt = Integer.parseInt(workTime.getText().toString());
+        restInt = Integer.parseInt(restTime.getText().toString());
+        cycleInt = Integer.parseInt(cycleTime.getText().toString());
+        setsInt = Integer.parseInt(setsTime.getText().toString());
+        cooldownInt = Integer.parseInt(cooldownTime.getText().toString());
+
         id = "newWorkout";
-        Workout myworkout = new Workout(id,workInt, restInt, cooldownInt, setsInt, cycleInt);
+
+        Workout myworkout = new Workout(id, workInt, restInt, cooldownInt, setsInt, cycleInt);
         /*
         intentOpenWorkout.putExtra(Extra_work,workInt);
         intentOpenWorkout.putExtra(Extra_rest,restInt);

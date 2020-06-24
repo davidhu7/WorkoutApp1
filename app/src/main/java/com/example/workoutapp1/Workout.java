@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.cardview.widget.CardView;
-
 import java.io.Serializable;
+
+import androidx.cardview.widget.CardView;
 
 public class Workout implements Parcelable {
     //stringId, workTime resttime CooldownTime Sets Cycles
@@ -85,12 +85,12 @@ public class Workout implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(name);
-        parcel.writeInt(workTime);
-        parcel.writeInt(restTime);
-        parcel.writeInt(cooldownTime);
-        parcel.writeInt(sets);
-        parcel.writeInt(cycles);
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeInt(workTime);
+        dest.writeInt(restTime);
+        dest.writeInt(cooldownTime);
+        dest.writeInt(sets);
+        dest.writeInt(cycles);
     }
 }

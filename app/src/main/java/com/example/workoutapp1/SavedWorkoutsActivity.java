@@ -78,7 +78,7 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
             // Initialize a new TextView to put in CardView
             TextView tv = new TextView(this);
             tv.setLayoutParams(params);
-            tv.setText("help me");
+            tv.setText("Workout WorkTime: " + workouts[i].getWorkTime());
             tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
             tv.setTextColor(Color.RED);
 

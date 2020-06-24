@@ -40,6 +40,7 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
         System.arraycopy(parcelableArrayExtra, 0, workouts, 0, parcelableArrayExtra.length);
         sLinearLayout = findViewById(R.id.viewList);
 
+
         // Set the CardView layoutParams
         params = new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -64,23 +65,25 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
         cardViews = new CardView[workouts.length];
         for(int i = 0; i < workouts.length; i++) {
             CardView card = new CardView(this);
+            card.setClickable(true);
             card.setLayoutParams(params);
             // Set CardView corner radius
             card.setRadius(9);
             // Set cardView content padding
             card.setContentPadding(15, 15, 15, 15);
             // Set a background color for CardView
-            card.setCardBackgroundColor(Color.parseColor("#FFC6D6C3"));
+            card.setCardBackgroundColor(Color.BLUE);
             // Set the CardView maximum elevation
-            card.setMaxCardElevation(15);
+            card.setMaxCardElevation(50);
             // Set CardView elevation
-            card.setCardElevation(9);
+            card.setCardElevation(25);
             // Initialize a new TextView to put in CardView
+
             TextView tv = new TextView(this);
             tv.setLayoutParams(params);
             tv.setText("Workout WorkTime: " + workouts[i].getWorkTime());
             tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
-            tv.setTextColor(Color.RED);
+            tv.setTextColor(Color.WHITE);
 
             card.addView(tv);
 

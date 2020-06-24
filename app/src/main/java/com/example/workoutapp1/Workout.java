@@ -2,9 +2,11 @@ package com.example.workoutapp1;
 
 import android.app.Activity;
 
+import java.io.Serializable;
+
 import androidx.cardview.widget.CardView;
 
-public class Workout {
+public class Workout implements Serializable {
     //stringId, workTime resttime CooldownTime Sets Cycles
     private String name;
     private int workTime;

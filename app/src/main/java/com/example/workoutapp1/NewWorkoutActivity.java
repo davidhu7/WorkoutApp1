@@ -9,12 +9,20 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class NewWorkoutActivity extends AppCompatActivity {
-
+    /*
+    public static final String Extra_work = "com.example.workoutapp1.work";
+    public static final String Extra_rest = "com.example.workoutapp1.rest";
+    public static final String Extra_cooldown = "com.example.workoutapp1.cooldown";
+    public static final String Extra_sets = "com.example.workoutapp1.sets";
+    public static final String Extra_cycles = "com.example.workoutapp1.cycles";
+     */
+    public static final String Extra_workout_pass = "com.example.workoutapp1.newWorkout";
     private EditText workTime;
     private EditText restTime;
     private EditText cycleTime;
     private EditText setsTime;
     private EditText cooldownTime;
+    private String id;
     private int totalTime;
     private int workInt;
     private int restInt;
@@ -22,7 +30,7 @@ public class NewWorkoutActivity extends AppCompatActivity {
     private int setsInt;
     private int cooldownInt;
     private Button startButton;
-
+    public Workout myworkout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,19 +38,19 @@ public class NewWorkoutActivity extends AppCompatActivity {
         setContentView(R.layout.new_workouts);
 
         workTime = findViewById(R.id.workNum);
-        // workInt = Integer.parseInt(workTime.getText().toString());
+        workInt = Integer.parseInt(workTime.getText().toString());
 
         restTime = findViewById(R.id.restNum);
-        // restInt = Integer.parseInt(restTime.getText().toString());
+        restInt = Integer.parseInt(restTime.getText().toString());
 
         cycleTime = findViewById(R.id.cycleNum);
-        // cycleInt = Integer.parseInt(cycleTime.getText().toString());
+        cycleInt = Integer.parseInt(cycleTime.getText().toString());
 
         setsTime = findViewById(R.id.setsNum);
-        //  setsInt = Integer.parseInt(setsTime.getText().toString());
+        setsInt = Integer.parseInt(setsTime.getText().toString());
 
         cooldownTime = findViewById(R.id.cooldownNum);
-        // cooldownInt = Integer.parseInt(cooldownTime.getText().toString());
+        cooldownInt = Integer.parseInt(cooldownTime.getText().toString());
 
         // totalTime = cooldownInt + setsInt + cycleInt + restInt + workInt;
 
@@ -62,7 +70,18 @@ public class NewWorkoutActivity extends AppCompatActivity {
 
     public void openWorkOut(){
         Intent intentOpenWorkout = new Intent(this, WorkoutActivity.class);
+        id = "newWorkout";
+        Workout myworkout = new Workout(id,workInt, restInt, cooldownInt, setsInt, cycleInt);
+        /*
+        intentOpenWorkout.putExtra(Extra_work,workInt);
+        intentOpenWorkout.putExtra(Extra_rest,restInt);
+        intentOpenWorkout.putExtra(Extra_cooldown,cooldownInt);
+        intentOpenWorkout.putExtra(Extra_sets,setsInt);
+        intentOpenWorkout.putExtra(Extra_cycles,cycleInt);
+        */
+        intentOpenWorkout.putExtra(Extra_workout_pass, myworkout);
         startActivity(intentOpenWorkout);
+
         }
 
     }

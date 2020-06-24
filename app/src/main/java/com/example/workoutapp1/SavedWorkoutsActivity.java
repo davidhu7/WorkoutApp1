@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -20,7 +21,8 @@ import java.util.ArrayList;
 public class SavedWorkoutsActivity extends AppCompatActivity {
 
     private LinearLayout sLinearLayout;
-    private ArrayList<CardView> cardViews;
+    private CardView[] cardViews;
+    private Workout[] workouts;
 
 
 
@@ -28,8 +30,11 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.saved_workouts);
-        sLinearLayout = findViewById(R.id.viewList);
+        Intent intent = getIntent();
 
+
+
+        sLinearLayout = findViewById(R.id.viewList);
         CardView card = new CardView(this);
 
         // Set the CardView layoutParams
@@ -37,39 +42,17 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
-        card.setLayoutParams(params);
 
-        // Set CardView corner radius
-        card.setRadius(9);
-
-        // Set cardView content padding
-        card.setContentPadding(15, 15, 15, 15);
-
-        // Set a background color for CardView
-        card.setCardBackgroundColor(Color.parseColor("#FFC6D6C3"));
-
-        // Set the CardView maximum elevation
-        card.setMaxCardElevation(15);
-
-        // Set CardView elevation
-        card.setCardElevation(9);
-
-        // Initialize a new TextView to put in CardView
-        TextView tv = new TextView(this);
-        tv.setLayoutParams(params);
-        tv.setText("CardView\nProgrammatically");
-        tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
-        tv.setTextColor(Color.RED);
-
-        // Put the TextView in CardView
-        card.addView(tv);
-
-        //add card into arraylist
-
-
-
-
-        sLinearLayout.addView(card);
 
     }
+    //TODO: this method will populate the linear layout, filling the list.
+    private void populateLayout() {
+
+    }
+    //TODO: this method will fill up the CardViews array with an array of workouts.
+    private void populateCardViews(Workout[] workouts) {
+
+
+    }
+
 }

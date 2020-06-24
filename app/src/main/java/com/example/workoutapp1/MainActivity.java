@@ -11,6 +11,10 @@ public class MainActivity extends AppCompatActivity {
     private Button savedBtn;
     private Button startBtn;
 
+    private Workout[] workouts;
+
+    public static final String EXTRA_WORKOUTS = "com.example1.workoutapp1.EXTRA_WORKOUTS";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +46,21 @@ public class MainActivity extends AppCompatActivity {
 
     public void openSavedScreen() {
         Intent intentOpenSavedScreen = new Intent(this, SavedWorkoutsActivity.class);
+        intentOpenSavedScreen.putExtra(EXTRA_WORKOUTS, workouts);
+
         startActivity(intentOpenSavedScreen);
     }
+
+    //TODO: This method will give our array a length, based off the # of lines read in the file. for now, it is static.
+    public void createArray() {
+        workouts = new Workout[9];
+    }
+
+    //TODO: This method will fill up the Workout array from file read. For now, it is static.
+    public void populateWorkoutArray () {
+        for(int i = 0; i < workouts.length; i++ ) {
+            workouts[i] = new Workout(i, i, i, i, i);
+        }
+    }
+
 }

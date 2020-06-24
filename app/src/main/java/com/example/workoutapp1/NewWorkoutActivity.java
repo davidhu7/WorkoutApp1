@@ -61,7 +61,7 @@ public class NewWorkoutActivity extends AppCompatActivity {
     }
 
     public void openWorkOut(){
-        Intent intentOpenWorkout = new Intent(this, Workout.class);
+        Intent intentOpenWorkout = new Intent(this, WorkoutActivity.class);
         startActivity(intentOpenWorkout);
         }
 

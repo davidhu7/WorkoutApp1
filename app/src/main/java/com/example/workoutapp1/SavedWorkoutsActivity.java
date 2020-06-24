@@ -64,6 +64,10 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
         // Put the TextView in CardView
         card.addView(tv);
 
+        //add card into arraylist
+
+
+
 
         sLinearLayout.addView(card);
 

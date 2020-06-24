@@ -46,13 +46,18 @@ public class NewWorkoutActivity extends AppCompatActivity {
 
         // totalTime = cooldownInt + setsInt + cycleInt + restInt + workInt;
 
-        startButton = (Button) findViewById(R.id.startNewButton);
+        startButton = (Button) findViewById(R.id.startWorkout);
+
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openWorkOut();
             }
+
+
         });
+
+
     }
 
     public void openWorkOut(){

@@ -1,12 +1,14 @@
 package com.example.workoutapp1;
 
 import android.app.Activity;
-
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import androidx.cardview.widget.CardView;
 
-public class Workout implements Serializable {
+import java.io.Serializable;
+
+public class Workout implements Parcelable {
     //stringId, workTime resttime CooldownTime Sets Cycles
     private String name;
     private int workTime;
@@ -34,7 +36,26 @@ public class Workout implements Serializable {
     }
 
 
+    protected Workout(Parcel in) {
+        name = in.readString();
+        workTime = in.readInt();
+        restTime = in.readInt();
+        cooldownTime = in.readInt();
+        sets = in.readInt();
+        cycles = in.readInt();
+    }
 
+    public static final Creator<Workout> CREATOR = new Creator<Workout>() {
+        @Override
+        public Workout createFromParcel(Parcel in) {
+            return new Workout(in);
+        }
+
+        @Override
+        public Workout[] newArray(int size) {
+            return new Workout[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -58,6 +79,18 @@ public class Workout implements Serializable {
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
-
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeInt(workTime);
+        parcel.writeInt(restTime);
+        parcel.writeInt(cooldownTime);
+        parcel.writeInt(sets);
+        parcel.writeInt(cycles);
+    }
 }

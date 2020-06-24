@@ -37,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
+
+        createArray();
+        populateWorkoutArray();
     }
 
     public void openMainScreen() {
@@ -53,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO: This method will give our array a length, based off the # of lines read in the file. for now, it is static.
     public void createArray() {
-        workouts = new Workout[9];
+        workouts = new Workout[20];
     }
 
     //TODO: This method will fill up the Workout array from file read. For now, it is static.

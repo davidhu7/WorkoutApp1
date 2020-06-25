@@ -5,9 +5,11 @@
     <string name="companyName">ES4</string>
     <string name="workTimeText">Work Time</string>
     <string name="restTimeText">Rest Time</string>
-    <string name="cyclesText">Cycles</string>
+    <string name="repsText">Reps</string>
     <string name="setsText">Sets</string>
     <string name="cooldownTimeText">Cooldown Time</string>
     <string name="startWorkout">Start</string>
     <string name="hint">0</string>
+    <string name="StartTime">00:00</string>
+    <string name="Exercise">Exercise </string>
 </resources>

@@ -6,4 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".WorkoutActivity">
 
+    <TextView
+        android:id="@+id/Timer"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:text="@string/StartTime"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/Start_Pause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/startWorkout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.455"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Timer"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/Exercise"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:text="@string/Exercise"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/Timer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

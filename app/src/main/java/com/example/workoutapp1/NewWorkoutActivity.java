@@ -18,12 +18,15 @@ public class NewWorkoutActivity extends AppCompatActivity {
     public static final String Extra_sets = "com.example.workoutapp1.sets";
     public static final String Extra_cycles = "com.example.workoutapp1.cycles";
      */
+    //Variable to pass to the next activity
     public static final String Extra_workout_pass = "com.example.workoutapp1.newWorkout";
+    //Getting the numbers that the user inputs
     private EditText workTime;
     private EditText restTime;
     private EditText cycleTime;
     private EditText setsTime;
     private EditText cooldownTime;
+    //Setting variables to pass onto the next activity
     private String id;
     private int totalTime;
     private int workInt;
@@ -37,7 +40,8 @@ public class NewWorkoutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_workouts);
-
+        //Makes sure all of the boxes are filled in before moving onto the next
+        //activity
         workTime = findViewById(R.id.workNum);
         workTime.addTextChangedListener(checkInput);
 
@@ -56,7 +60,7 @@ public class NewWorkoutActivity extends AppCompatActivity {
         // totalTime = cooldownInt + setsInt + cycleInt + restInt + workInt;
 
         startButton = (Button) findViewById(R.id.startWorkout);
-
+        //Opens the next activity by clicking start
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,7 +72,7 @@ public class NewWorkoutActivity extends AppCompatActivity {
 
 
     }
-
+    //This method makes sure the boxes all have an input before continuing
     private TextWatcher checkInput = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -82,7 +86,7 @@ public class NewWorkoutActivity extends AppCompatActivity {
             String testCycle = cycleTime.getText().toString().trim();
             String testSetsTime = setsTime.getText().toString().trim();
             String testCooldown = cooldownTime.getText().toString().trim();
-
+            //If they are not empty then go to the next activity
             startButton.setEnabled(!testWorkout.isEmpty() && !testRestTime.isEmpty()
                     && !testCycle.isEmpty() && !testSetsTime.isEmpty() && !testCooldown.isEmpty());
         }
@@ -95,7 +99,7 @@ public class NewWorkoutActivity extends AppCompatActivity {
 
     public void openWorkOut(){
         Intent intentOpenWorkout = new Intent(this, WorkoutActivity.class);
-
+        //Gets the data ready to be sent to the next activity
         workInt = Integer.parseInt(workTime.getText().toString());
         restInt = Integer.parseInt(restTime.getText().toString());
         cycleInt = Integer.parseInt(cycleTime.getText().toString());
@@ -112,6 +116,7 @@ public class NewWorkoutActivity extends AppCompatActivity {
         intentOpenWorkout.putExtra(Extra_sets,setsInt);
         intentOpenWorkout.putExtra(Extra_cycles,cycleInt);
         */
+        //Sends the data to the next activity
         intentOpenWorkout.putExtra(Extra_workout_pass, myworkout);
         startActivity(intentOpenWorkout);
 

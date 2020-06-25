@@ -9,12 +9,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 public class WorkoutActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private TextView countdown;
     private Button start_pause;
     private boolean timerRunning;
-    private long input;
+    private long startTime = 600000;
+    private long timeLeft;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,51 +32,55 @@ public class WorkoutActivity extends AppCompatActivity {
         int cooldownTime = newWorkout.getCooldownTime();
         int sets = newWorkout.getSets();
         int cycles = newWorkout.getCycles();
-        countdown = findViewById(R.id.workNum);
-        input = workTime;
+        countdown = findViewById(R.id.Timer);
+        start_pause = findViewById(R.id.Start_Pause);
+        startTime = workTime * 1000;
+
+        timeLeft = startTime;
+        updateTime();
         start_pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startStop();
+                if (timerRunning){
+                    stopTime();
+                }
+                else{
+                    startTime();
+                }
             }
         });
-
     }
 
-    public void startStop(){
-        if (timerRunning){
-            stopTime();
-        }
-        else{
-            startTime();
-        }
-    }
+
 
     public void startTime(){
-        countDownTimer = new CountDownTimer(input, 1000) {
+        countDownTimer = new CountDownTimer(timeLeft, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                input = millisUntilFinished;
+                timeLeft = millisUntilFinished;
                 updateTime();
             }
 
             @Override
             public void onFinish() {
-
+                timerRunning = false;
+                start_pause.setText("Start");
             }
         }.start();
         timerRunning = true;
+        start_pause.setText("Pause");
     }
 
     public void stopTime(){
         countDownTimer.cancel();
+        start_pause.setText("Start");
         timerRunning = false;
     }
 
     public void updateTime(){
-        int minutes = (int) input/60000;
-        int seconds = (int) input % 60000 /1000;
-
+        int minutes = (int) (timeLeft/1000)/60;
+        int seconds = (int) (timeLeft/1000)%60;
+        /*
         String timeLeftText;
         timeLeftText = ""+ minutes;
         timeLeftText += ":";
@@ -81,7 +88,8 @@ public class WorkoutActivity extends AppCompatActivity {
             timeLeftText += "0";
         }
         timeLeftText += seconds;
-
+*/
+        String timeLeftText = String.format(Locale.getDefault(), "%02d:%02d",minutes,seconds);
         countdown.setText(timeLeftText);
     }
 

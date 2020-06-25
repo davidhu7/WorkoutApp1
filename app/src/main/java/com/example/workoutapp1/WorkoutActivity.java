@@ -22,7 +22,7 @@ public class WorkoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_workout);
 
         Intent getWorkout = getIntent();
-        Workout newWorkout = (Workout)getWorkout.getParcelableExtra(NewWorkoutActivity.Extra_workout_pass);
+        Workout newWorkout = (Workout)getWorkout.getParcelableExtra(NewWorkoutActivity.EXTRA_WORKOUT);
 
         int workTime = newWorkout.getWorkTime();
         int restTime = newWorkout.getRestTime();
@@ -31,6 +31,7 @@ public class WorkoutActivity extends AppCompatActivity {
         int cycles = newWorkout.getCycles();
         countdown = findViewById(R.id.workNum);
         input = workTime;
+        //TODO: This thing is really gay and its hard to do so help
         start_pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

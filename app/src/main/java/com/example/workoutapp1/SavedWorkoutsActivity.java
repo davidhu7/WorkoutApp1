@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -41,6 +42,18 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
         sLinearLayout = findViewById(R.id.viewList);
 
 
+
+//        sLinearLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                int pos = ((ViewGroup) view.getParent()).indexOfChild(view);
+//                Toast.makeText(SavedWorkoutsActivity.this, "You clicked on " + pos, Toast.LENGTH_SHORT).show();
+//
+//
+//            }
+//        });
+
+
         // Set the CardView layoutParams
         params = new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -60,7 +73,8 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
         }
 
     }
-    //TODO: this method will fill up the CardViews array with an array of workouts.
+    //TODO: this method will fill up the CardViews array with an array of workouts. Make it look nicer
+    //TODO: Make the textView display more meaningful information
     private void populateCardViews() {
         cardViews = new CardView[workouts.length];
         for(int i = 0; i < workouts.length; i++) {
@@ -85,12 +99,30 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
             tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
             tv.setTextColor(Color.WHITE);
 
+            card.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int pos = ((ViewGroup) view.getParent()).indexOfChild(view);
+                    Toast.makeText(SavedWorkoutsActivity.this, "You clicked on " + pos, Toast.LENGTH_SHORT).show();
+                    openWorkout(pos);
+                }
+            });
+
             card.addView(tv);
+
 
             cardViews[i] = card;
         }
 
 
+    }
+
+
+
+    public void openWorkout(int workoutIndex) {
+        Intent intent = new Intent(this, WorkoutActivity.class);
+        intent.putExtra(NewWorkoutActivity.EXTRA_WORKOUT, workouts[workoutIndex] );
+        startActivity(intent);
     }
 
 }

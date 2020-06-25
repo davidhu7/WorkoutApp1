@@ -14,7 +14,7 @@ public class WorkoutActivity extends AppCompatActivity {
     private TextView countdown;
     private Button start_pause;
     private boolean timerRunning;
-    private long input;
+    private long timeLeft;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,58 +22,60 @@ public class WorkoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_workout);
 
         Intent getWorkout = getIntent();
-        Workout newWorkout = (Workout)getWorkout.getParcelableExtra(NewWorkoutActivity.Extra_workout_pass);
+        Workout newWorkout = (Workout)getWorkout.getParcelableExtra(NewWorkoutActivity.EXTRA_WORKOUT);
 
         int workTime = newWorkout.getWorkTime();
         int restTime = newWorkout.getRestTime();
         int cooldownTime = newWorkout.getCooldownTime();
         int sets = newWorkout.getSets();
         int cycles = newWorkout.getCycles();
-        countdown = findViewById(R.id.workNum);
-        input = workTime;
+        countdown = findViewById(R.id.Timer);
+        start_pause = findViewById(R.id.Start_Pause);
+        timeLeft = workTime * 1000;
+        updateTime();
         start_pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startStop();
+                if (timerRunning){
+                    stopTime();
+                }
+                else{
+                    startTime();
+                }
             }
         });
 
     }
 
-    public void startStop(){
-        if (timerRunning){
-            stopTime();
-        }
-        else{
-            startTime();
-        }
-    }
+
 
     public void startTime(){
-        countDownTimer = new CountDownTimer(input, 1000) {
+        countDownTimer = new CountDownTimer(timeLeft, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                input = millisUntilFinished;
+                timeLeft = millisUntilFinished;
                 updateTime();
             }
 
             @Override
             public void onFinish() {
-
+                start_pause.setText("Start");
             }
         }.start();
         timerRunning = true;
+        start_pause.setText("Pause");
     }
 
     public void stopTime(){
         countDownTimer.cancel();
+        start_pause.setText("Start");
         timerRunning = false;
     }
 
     public void updateTime(){
-        int minutes = (int) input/60000;
-        int seconds = (int) input % 60000 /1000;
-
+        int minutes = (int) (timeLeft/1000)/60;
+        int seconds = (int) (timeLeft/1000) % 60000;
+        /*
         String timeLeftText;
         timeLeftText = ""+ minutes;
         timeLeftText += ":";
@@ -81,7 +83,9 @@ public class WorkoutActivity extends AppCompatActivity {
             timeLeftText += "0";
         }
         timeLeftText += seconds;
+        */
 
+        String timeLeftText = String.format("%02d:%02d",minutes,seconds);
         countdown.setText(timeLeftText);
     }
 

@@ -19,7 +19,7 @@ public class NewWorkoutActivity extends AppCompatActivity {
     public static final String Extra_cycles = "com.example.workoutapp1.cycles";
      */
     //Variable to pass to the next activity
-    public static final String Extra_workout_pass = "com.example.workoutapp1.newWorkout";
+    public static final String EXTRA_WORKOUT = "com.example.workoutapp1.workout";
     //Getting the numbers that the user inputs
     private EditText workTime;
     private EditText restTime;
@@ -117,7 +117,7 @@ public class NewWorkoutActivity extends AppCompatActivity {
         intentOpenWorkout.putExtra(Extra_cycles,cycleInt);
         */
         //Sends the data to the next activity
-        intentOpenWorkout.putExtra(Extra_workout_pass, myworkout);
+        intentOpenWorkout.putExtra(EXTRA_WORKOUT, myworkout);
         startActivity(intentOpenWorkout);
 
         }

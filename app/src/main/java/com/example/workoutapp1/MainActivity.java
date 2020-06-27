@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        savedBtn = (Button) findViewById(R.id.savedButton);
+        savedBtn = findViewById(R.id.savedButton);
         savedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         //TODO: Eventually this needs to be deleted, and the files should be written to upon saving a workout instead.
         file = new File(this.getFilesDir(), SIMPLE_WORKOUTS);
         writeToFile("Test1,20,10,5,2,1", this);
-        writeToFile("Test2,10,5,2,1,1", this);
+        writeToFile("Test2,10,5,2,1,5", this);
         writeToFile("Test3,1,1,2,3,5", this);
 
 
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             String s;
             while(fileIn.hasNextLine()) {
                 s = fileIn.nextLine();
-                String split[] = s.split(",");
+                String[] split = s.split(",");
                 Workout w = new Workout(split[0], Integer.parseInt(split[1]), Integer.parseInt(split[2]), Integer.parseInt(split[3]), Integer.parseInt(split[4]), Integer.parseInt(split[5]));
                 workouts.add(w);
 
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         try (BufferedWriter fos = new BufferedWriter(new FileWriter(context.getFileStreamPath(SIMPLE_WORKOUTS), true))) {
 
             fos.write(data + "\n");
-            fos.close();
+
 
         } catch (IOException e) {
             e.printStackTrace();

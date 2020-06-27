@@ -9,6 +9,7 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class WorkoutActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
@@ -16,6 +17,12 @@ public class WorkoutActivity extends AppCompatActivity {
     private Button start_pause;
     private boolean timerRunning;
     private long timeLeft;
+
+    private int workTime;
+    private int restTime;
+    private int cooldownTime;
+    private boolean isWork;
+    private int counter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,15 +32,17 @@ public class WorkoutActivity extends AppCompatActivity {
         Intent getWorkout = getIntent();
         Workout newWorkout = (Workout)getWorkout.getParcelableExtra(NewWorkoutActivity.EXTRA_WORKOUT);
 
-        final int workTime = newWorkout.getWorkTime();
-        final int restTime = newWorkout.getRestTime();
-        final int cooldownTime = newWorkout.getCooldownTime();
+        workTime = newWorkout.getWorkTime();
+        restTime = newWorkout.getRestTime();
+        cooldownTime = newWorkout.getCooldownTime();
         final int sets = newWorkout.getSets();
         final int cycles = newWorkout.getCycles();
         countdown = findViewById(R.id.Timer);
         start_pause = findViewById(R.id.Start_Pause);
         timeLeft = workTime * 1000;
         updateTime();
+        isWork = true;
+        counter = sets * cycles;
 
         start_pause.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,9 +58,6 @@ public class WorkoutActivity extends AppCompatActivity {
         });
 
 
-        timeLeft = cooldownTime * 1000;
-        updateTime();
-
     }
 
     public void TotalWorkout(int workT, int restT, int cooldownT, int setsNum, int cyclesNum){
@@ -62,6 +68,9 @@ public class WorkoutActivity extends AppCompatActivity {
             timeLeft = workT;
             updateTime();
             startTime();
+
+
+
             //timeLeft = restT;
             //updateTime();
             //startTime();
@@ -74,12 +83,30 @@ public class WorkoutActivity extends AppCompatActivity {
             @Override
             public void onTick(long millisUntilFinished) {
                 timeLeft = millisUntilFinished;
+                Toast.makeText(WorkoutActivity.this, "Counter: " + counter, Toast.LENGTH_LONG).show();
+
+
                 updateTime();
             }
 
             @Override
             public void onFinish() {
-                //start_pause.setText("Start");
+                start_pause.setText("Start");
+                if(counter > 0) {
+                    if(isWork) {
+                        timeLeft = restTime * 1000;
+                        isWork = false;
+                    } else {
+                        timeLeft = workTime * 1000;
+                        isWork = true;
+                        counter--;
+                    }
+                    startTime();
+                }
+
+
+
+
             }
         }.start();
         timerRunning = true;
@@ -105,8 +132,27 @@ public class WorkoutActivity extends AppCompatActivity {
         timeLeftText += seconds;
         */
 
-        String timeLeftText = String.format("%02d:%02d",minutes,seconds);
+        @SuppressLint("DefaultLocale") String timeLeftText = String.format("%02d:%02d",minutes,seconds);
         countdown.setText(timeLeftText);
+    }
+
+
+    private void createCountDownTimer() {
+
+        countDownTimer = new CountDownTimer(timeLeft, 1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeLeft = millisUntilFinished;
+                updateTime();
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        };
     }
 
 }

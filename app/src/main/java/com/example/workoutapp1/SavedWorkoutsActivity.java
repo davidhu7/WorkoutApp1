@@ -12,6 +12,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +27,7 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
     private CardView[] cardViews;
     private Workout[] workouts;
 
-    private ViewGroup.LayoutParams params;
+    private LinearLayout.LayoutParams params;
     private ViewGroup.LayoutParams cardParams;
 
 
@@ -37,33 +38,32 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.saved_workouts);
         Intent intent = getIntent();
-        Parcelable[] parcelableArrayExtra = intent.getParcelableArrayExtra(MainActivity.EXTRA_WORKOUTS);
-        workouts = new Workout[parcelableArrayExtra.length];
-        System.arraycopy(parcelableArrayExtra, 0, workouts, 0, parcelableArrayExtra.length);
+        ArrayList<Parcelable> parcelableArrayExtra = intent.getParcelableArrayListExtra(MainActivity.EXTRA_WORKOUTS);
+        workouts = new Workout[parcelableArrayExtra.size()];
+        System.arraycopy(parcelableArrayExtra.toArray(), 0, workouts, 0, parcelableArrayExtra.size());
         sLinearLayout = findViewById(R.id.viewList);
 
 
 
 
         // Set the CardView layoutParams
-        params = new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
+        params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
         );
+        //set margins for the cardviews
+        params.setMargins(0, 10, 0, 40);
 
-
-
-
-        populateCardViews();
-        populateLayout();
+        populateCardViews(); //fill the cardview array
+        populateLayout();   //fill the layout with cardviews
 
 
     }
     //TODO: this method will populate the linear layout, filling the list.
     private void populateLayout() {
-
         for (CardView cardView : cardViews) {
             sLinearLayout.addView(cardView);
+
         }
 
     }
@@ -75,26 +75,26 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
             CardView card = new CardView(this);
             card.setClickable(true);
             card.setLayoutParams(params);
-
-
             // Set CardView corner radius
-            card.setRadius(9);
+            card.setRadius(20);
             // Set cardView content padding
-            card.setContentPadding(15, 15, 15, 15);
+            card.setContentPadding(20, 20, 20, 20);
             // Set a background color for CardView
-            card.setCardBackgroundColor(Color.BLUE);
+            card.setCardBackgroundColor(Color.BLACK);
             // Set the CardView maximum elevation
             card.setMaxCardElevation(50);
             // Set CardView elevation
-            card.setCardElevation(25);
+            card.setCardElevation(50);
+
 
             // Initialize new TextView to put in CardView
 
             TextView tv = new TextView(this);
             tv.setLayoutParams(params);
-            tv.setText("Workout WorkTime: " + workouts[i].getWorkTime());
+            tv.setText("Name: "+ workouts[i].getName());
             tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
             tv.setTextColor(Color.WHITE);
+            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
             card.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -106,8 +106,6 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
             });
 
             card.addView(tv);
-
-
             cardViews[i] = card;
         }
 

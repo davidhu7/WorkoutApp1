@@ -2,6 +2,7 @@ package com.example.workoutapp1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -24,15 +25,16 @@ public class WorkoutActivity extends AppCompatActivity {
         Intent getWorkout = getIntent();
         Workout newWorkout = (Workout)getWorkout.getParcelableExtra(NewWorkoutActivity.EXTRA_WORKOUT);
 
-        int workTime = newWorkout.getWorkTime();
-        int restTime = newWorkout.getRestTime();
-        int cooldownTime = newWorkout.getCooldownTime();
-        int sets = newWorkout.getSets();
-        int cycles = newWorkout.getCycles();
+        final int workTime = newWorkout.getWorkTime();
+        final int restTime = newWorkout.getRestTime();
+        final int cooldownTime = newWorkout.getCooldownTime();
+        final int sets = newWorkout.getSets();
+        final int cycles = newWorkout.getCycles();
         countdown = findViewById(R.id.Timer);
         start_pause = findViewById(R.id.Start_Pause);
         timeLeft = workTime * 1000;
         updateTime();
+
         start_pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,13 +43,31 @@ public class WorkoutActivity extends AppCompatActivity {
                 }
                 else{
                     startTime();
+                    //TotalWorkout(workTime,restTime,cooldownTime,sets,cycles);
                 }
             }
         });
 
+
+        timeLeft = cooldownTime * 1000;
+        updateTime();
+
     }
 
+    public void TotalWorkout(int workT, int restT, int cooldownT, int setsNum, int cyclesNum){
+        workT = workT * 1000;
+        restT = restT * 1000;
+        cooldownT = cooldownT * 1000;
+        for(int i = 0; i < cyclesNum * setsNum; i++){
+            timeLeft = workT;
+            updateTime();
+            startTime();
+            //timeLeft = restT;
+            //updateTime();
+            //startTime();
+        }
 
+    }
 
     public void startTime(){
         countDownTimer = new CountDownTimer(timeLeft, 1000) {
@@ -59,7 +79,7 @@ public class WorkoutActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                start_pause.setText("Start");
+                //start_pause.setText("Start");
             }
         }.start();
         timerRunning = true;

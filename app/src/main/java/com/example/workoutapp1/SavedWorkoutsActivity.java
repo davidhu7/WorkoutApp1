@@ -27,6 +27,7 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
     private Workout[] workouts;
 
     private ViewGroup.LayoutParams params;
+    private ViewGroup.LayoutParams cardParams;
 
 
 
@@ -43,22 +44,15 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
 
 
 
-//        sLinearLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                int pos = ((ViewGroup) view.getParent()).indexOfChild(view);
-//                Toast.makeText(SavedWorkoutsActivity.this, "You clicked on " + pos, Toast.LENGTH_SHORT).show();
-//
-//
-//            }
-//        });
-
 
         // Set the CardView layoutParams
         params = new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
+
+
+
 
         populateCardViews();
         populateLayout();
@@ -81,6 +75,8 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
             CardView card = new CardView(this);
             card.setClickable(true);
             card.setLayoutParams(params);
+
+
             // Set CardView corner radius
             card.setRadius(9);
             // Set cardView content padding
@@ -91,12 +87,13 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
             card.setMaxCardElevation(50);
             // Set CardView elevation
             card.setCardElevation(25);
-            // Initialize a new TextView to put in CardView
+
+            // Initialize new TextView to put in CardView
 
             TextView tv = new TextView(this);
             tv.setLayoutParams(params);
             tv.setText("Workout WorkTime: " + workouts[i].getWorkTime());
-            tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+            tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
             tv.setTextColor(Color.WHITE);
 
             card.setOnClickListener(new View.OnClickListener() {

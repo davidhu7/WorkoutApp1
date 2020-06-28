@@ -12,4 +12,6 @@
     <string name="hint">0</string>
     <string name="StartTime">00:00</string>
     <string name="Exercise">Exercise </string>
+    <string name="action_new">New Workout</string>
+    <string name="action_save">Save Workout</string>
 </resources>

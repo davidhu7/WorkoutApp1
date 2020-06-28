@@ -6,9 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.appcompat.widget.Toolbar;
 
 public class NewWorkoutActivity extends AppCompatActivity {
     /*
@@ -36,8 +41,17 @@ public class NewWorkoutActivity extends AppCompatActivity {
     private int cooldownInt;
     private Button startButton;
 
+    private Toolbar toolbar;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        toolbar = findViewById(R.id.toolbar);
+        //set it as the supportActionBar
+        setSupportActionBar(toolbar);
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_workouts);
         //Makes sure all of the boxes are filled in before moving onto the next
@@ -72,6 +86,20 @@ public class NewWorkoutActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.action_bar, menu);
+        //get a reference to the adding new workout button
+        MenuItem newWorkoutItem = menu.findItem(R.id.action_newWorkout);
+        //set it to invisible
+        newWorkoutItem.setVisible(false);
+
+        return true;
+    }
+
+
     //This method makes sure the boxes all have an input before continuing
     private TextWatcher checkInput = new TextWatcher() {
         @Override

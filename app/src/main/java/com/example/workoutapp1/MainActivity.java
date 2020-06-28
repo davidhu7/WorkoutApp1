@@ -5,22 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -41,14 +32,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //start a new workout button
         startBtn = findViewById(R.id.startNewButton);
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openMainScreen();
+                openNewWorkoutScreen();
             }
         });
 
+
+        //saved workouts button
         savedBtn = findViewById(R.id.savedButton);
         savedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,13 +61,13 @@ public class MainActivity extends AppCompatActivity {
         writeToFile("Test3,1,1,2,3,5", this);
 
 
-
+        //read in saved workouts from internal storage
         populateWorkoutArray();
     }
 
-    public void openMainScreen() {
-        Intent intentOpenMainScreen = new Intent(this, NewWorkoutActivity.class);
-        startActivity(intentOpenMainScreen);
+    public void openNewWorkoutScreen() {
+        Intent intentNewWorkoutScreen = new Intent(this, NewWorkoutActivity.class);
+        startActivity(intentNewWorkoutScreen);
     }
 
     public void openSavedScreen() {

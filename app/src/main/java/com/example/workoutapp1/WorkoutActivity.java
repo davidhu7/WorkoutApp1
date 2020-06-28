@@ -6,6 +6,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,7 +32,7 @@ public class WorkoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_workout);
 
         Intent getWorkout = getIntent();
-        Workout newWorkout = (Workout)getWorkout.getParcelableExtra(NewWorkoutActivity.EXTRA_WORKOUT);
+        Workout newWorkout = getWorkout.getParcelableExtra(NewWorkoutActivity.EXTRA_WORKOUT);
 
         workTime = newWorkout.getWorkTime();
         restTime = newWorkout.getRestTime();
@@ -59,6 +61,7 @@ public class WorkoutActivity extends AppCompatActivity {
 
 
     }
+
 
     public void TotalWorkout(int workT, int restT, int cooldownT, int setsNum, int cyclesNum){
         workT = workT * 1000;

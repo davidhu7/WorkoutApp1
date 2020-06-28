@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="@string/action_new"
+        android:id="@+id/action_newWorkout"
+        android:icon="@drawable/ic_workout_add_24px"
+        app:showAsAction="ifRoom">
+
+
+    </item>
+
+    <item
+        android:title="@string/action_save"
+        android:id="@+id/action_saveWorkout"
+        android:icon="@drawable/ic_done_24px"
+        android:iconTint="@color/colorPrimary"
+        app:showAsAction="ifRoom"></item>
+
+</menu>

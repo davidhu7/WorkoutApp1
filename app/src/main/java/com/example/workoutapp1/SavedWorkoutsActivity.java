@@ -1,6 +1,7 @@
 package com.example.workoutapp1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import android.content.Context;
@@ -9,12 +10,16 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import org.w3c.dom.Text;
 
@@ -26,6 +31,7 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
     private LinearLayout sLinearLayout;
     private CardView[] cardViews;
     private Workout[] workouts;
+    private Toolbar toolbar;
 
     private LinearLayout.LayoutParams params;
     private ViewGroup.LayoutParams cardParams;
@@ -37,11 +43,22 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.saved_workouts);
+
+        //get intent from mainactivity
         Intent intent = getIntent();
+        //obtain the arrayList of workouts from the Main Activity
         ArrayList<Parcelable> parcelableArrayExtra = intent.getParcelableArrayListExtra(MainActivity.EXTRA_WORKOUTS);
         workouts = new Workout[parcelableArrayExtra.size()];
+        //copy the ArrayList to our workouts array
         System.arraycopy(parcelableArrayExtra.toArray(), 0, workouts, 0, parcelableArrayExtra.size());
+        //create a reference for our LinearLayout
         sLinearLayout = findViewById(R.id.viewList);
+        //create a reference to our Toolbar
+        toolbar = findViewById(R.id.toolbar);
+        //set it as the supportActionBar
+        setSupportActionBar(toolbar);
+
+
 
 
 
@@ -59,7 +76,15 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
 
 
     }
-    //TODO: this method will populate the linear layout, filling the list.
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.action_bar, menu);
+        return true;
+    }
+
     private void populateLayout() {
         for (CardView cardView : cardViews) {
             sLinearLayout.addView(cardView);
@@ -67,7 +92,6 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
         }
 
     }
-    //TODO: this method will fill up the CardViews array with an array of workouts. Make it look nicer
     //TODO: Make the textView display more meaningful information
     private void populateCardViews() {
         cardViews = new CardView[workouts.length];
@@ -100,7 +124,6 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     int pos = ((ViewGroup) view.getParent()).indexOfChild(view);
-                    Toast.makeText(SavedWorkoutsActivity.this, "You clicked on " + pos, Toast.LENGTH_SHORT).show();
                     openWorkout(pos);
                 }
             });
@@ -111,13 +134,21 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
 
 
     }
-
-
-
     public void openWorkout(int workoutIndex) {
         Intent intent = new Intent(this, WorkoutActivity.class);
         intent.putExtra(NewWorkoutActivity.EXTRA_WORKOUT, workouts[workoutIndex] );
         startActivity(intent);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_newWorkout:
+                Intent intentNewWorkoutScreen = new Intent(this, NewWorkoutActivity.class);
+                startActivity(intentNewWorkoutScreen);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

@@ -6,14 +6,16 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/appName"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".WorkoutActivity"></activity>
+        <activity
+            android:name=".PopUpTextActivity"
+            android:theme="@style/AppTheme.PopUpTheme"></activity>
+        <activity android:name=".WorkoutActivity" />
         <activity android:name=".NewWorkoutActivity" />
         <activity android:name=".SavedWorkoutsActivity" />
         <activity android:name=".MainActivity">
@@ -22,7 +24,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 

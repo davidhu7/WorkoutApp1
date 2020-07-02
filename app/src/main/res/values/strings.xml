@@ -14,4 +14,6 @@
     <string name="Exercise">Exercise </string>
     <string name="action_new">New Workout</string>
     <string name="action_save">Save Workout</string>
+    <string name="popup_hint">Enter a name for your workout:</string>
+    <string name="confirm_text">CONFIRM</string>
 </resources>

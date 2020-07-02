@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class MainActivity extends AppCompatActivity {
     private Button savedBtn;
     private Button startBtn;
-    private static final String SIMPLE_WORKOUTS = "simple_workouts";
+    public static final String SIMPLE_WORKOUTS = "simple_workouts";
     private int numLines;
 
     private ArrayList<Workout> workouts = new ArrayList<>();

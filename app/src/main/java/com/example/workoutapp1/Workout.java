@@ -78,6 +78,10 @@ public class Workout implements Parcelable {
         return cycles;
     }
 
+    public String toString() {
+        return name + "," + workTime + "," + restTime + "," + cooldownTime + "," + sets + "," + cycles;
+    }
+
 
     @Override
     public int describeContents() {

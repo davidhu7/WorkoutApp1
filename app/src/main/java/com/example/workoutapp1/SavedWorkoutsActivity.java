@@ -50,7 +50,11 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
         ArrayList<Parcelable> parcelableArrayExtra = intent.getParcelableArrayListExtra(MainActivity.EXTRA_WORKOUTS);
         workouts = new Workout[parcelableArrayExtra.size()];
         //copy the ArrayList to our workouts array
-        System.arraycopy(parcelableArrayExtra.toArray(), 0, workouts, 0, parcelableArrayExtra.size());
+        try {
+            System.arraycopy(parcelableArrayExtra.toArray(), 0, workouts, 0, parcelableArrayExtra.size());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         //create a reference for our LinearLayout
         sLinearLayout = findViewById(R.id.viewList);
         //create a reference to our Toolbar
@@ -82,6 +86,11 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.action_bar, menu);
+        MenuItem item = menu.findItem(R.id.action_saveWorkout);
+        //hide save workout button
+        item.setVisible(false);
+
+
         return true;
     }
 
@@ -147,8 +156,13 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
                 Intent intentNewWorkoutScreen = new Intent(this, NewWorkoutActivity.class);
                 startActivity(intentNewWorkoutScreen);
                 return true;
+            case R.id.action_saveWorkout:
+
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
 }

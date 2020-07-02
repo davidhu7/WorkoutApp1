@@ -2,10 +2,12 @@ package com.example.workoutapp1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,6 +16,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.widget.Toolbar;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class NewWorkoutActivity extends AppCompatActivity {
     /*
@@ -73,7 +79,7 @@ public class NewWorkoutActivity extends AppCompatActivity {
 
         // totalTime = cooldownInt + setsInt + cycleInt + restInt + workInt;
 
-        startButton = (Button) findViewById(R.id.startWorkout);
+        startButton = findViewById(R.id.startWorkout);
         //Opens the next activity by clicking start
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,10 +91,12 @@ public class NewWorkoutActivity extends AppCompatActivity {
         });
 
 
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        Log.e("TAG", "Oncreate Options menu called");
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.action_bar, menu);
         //get a reference to the adding new workout button
@@ -96,7 +104,52 @@ public class NewWorkoutActivity extends AppCompatActivity {
         //set it to invisible
         newWorkoutItem.setVisible(false);
 
+
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_newWorkout:
+
+
+                return true;
+            case R.id.action_saveWorkout:
+                //grab values
+                workInt = Integer.parseInt(workTime.getText().toString());
+                restInt = Integer.parseInt(restTime.getText().toString());
+                cycleInt = Integer.parseInt(cycleTime.getText().toString());
+                setsInt = Integer.parseInt(setsTime.getText().toString());
+                cooldownInt = Integer.parseInt(cooldownTime.getText().toString());
+
+                id = "newWorkout";
+
+                Workout myworkout = new Workout(id, workInt, restInt, cooldownInt, setsInt, cycleInt);
+                openPopUpActivity();
+
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void openPopUpActivity() {
+        Intent intent = new Intent(NewWorkoutActivity.this, PopUpTextActivity.class);
+        startActivity(intent);
+    }
+
+    public void writeToFile(String data, Context context) {
+        //String existing = readFromFile(context);
+        try (BufferedWriter fos = new BufferedWriter(new FileWriter(context.getFileStreamPath(MainActivity.SIMPLE_WORKOUTS), true))) {
+
+            fos.write(data + "\n");
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

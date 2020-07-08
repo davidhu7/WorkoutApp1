@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.widget.Toolbar;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private Button startBtn;
     public static final String SIMPLE_WORKOUTS = "simple_workouts";
     private int numLines;
+    Toolbar toolbar;
 
     private ArrayList<Workout> workouts = new ArrayList<>();
 
@@ -63,6 +66,10 @@ public class MainActivity extends AppCompatActivity {
 
         //read in saved workouts from internal storage
         populateWorkoutArray();
+
+        toolbar = findViewById(R.id.toolbar);
+        //set it as the supportActionBar
+        setSupportActionBar(toolbar);
     }
 
     public void openNewWorkoutScreen() {

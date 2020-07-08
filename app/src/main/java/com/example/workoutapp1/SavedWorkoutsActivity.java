@@ -44,6 +44,7 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.saved_workouts);
 
+
         //get intent from mainactivity
         Intent intent = getIntent();
         //obtain the arrayList of workouts from the Main Activity
@@ -91,7 +92,7 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
         item.setVisible(false);
 
 
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     private void populateLayout() {

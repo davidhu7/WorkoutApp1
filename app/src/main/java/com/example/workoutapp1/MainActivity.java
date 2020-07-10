@@ -20,15 +20,16 @@ import java.util.Scanner;
 public class MainActivity extends AppCompatActivity {
     private Button savedBtn;
     private Button startBtn;
-    public static final String SIMPLE_WORKOUTS = "simple_workouts";
     private int numLines;
     Toolbar toolbar;
 
-    private ArrayList<Workout> workouts = new ArrayList<>();
+    public ArrayList<Workout> workouts = new ArrayList<>();
 
-    File file;
+    public File file;
 
     public static final String EXTRA_WORKOUTS = "com.example1.workoutapp1.EXTRA_WORKOUTS";
+    public static final String SIMPLE_WORKOUTS = "simple_workouts";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +60,9 @@ public class MainActivity extends AppCompatActivity {
 
         //TODO: Eventually this needs to be deleted, and the files should be written to upon saving a workout instead.
         file = new File(this.getFilesDir(), SIMPLE_WORKOUTS);
-        writeToFile("Test1,20,10,5,2,1", this);
-        writeToFile("Test2,10,5,2,1,5", this);
-        writeToFile("Test3,1,1,2,3,5", this);
+//        writeToFile("Test1,20,10,5,2,1", this);
+//        writeToFile("Test2,10,5,2,1,5", this);
+//        writeToFile("Test3,1,1,2,3,5", this);
 
 
         //read in saved workouts from internal storage
@@ -106,6 +107,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    /**
+     * Method writes to main SIMPLE_WORKOUTS file.
+     *
+     * @param data
+     * @param context
+     */
     public void writeToFile(String data, Context context) {
         //String existing = readFromFile(context);
         try (BufferedWriter fos = new BufferedWriter(new FileWriter(context.getFileStreamPath(SIMPLE_WORKOUTS), true))) {

@@ -16,4 +16,5 @@
     <string name="action_save">Save Workout</string>
     <string name="popup_hint">Enter a name for your workout:</string>
     <string name="confirm_text">CONFIRM</string>
+    <string name="input_warning">Make sure all workout values are filled in!</string>
 </resources>

@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -43,6 +44,9 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.saved_workouts);
+
+        //populateWorkoutArray();
+
 
 
         //get intent from mainactivity

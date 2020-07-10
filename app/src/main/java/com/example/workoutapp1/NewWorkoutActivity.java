@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -48,16 +49,14 @@ public class NewWorkoutActivity extends AppCompatActivity {
     private Button startButton;
 
     private Toolbar toolbar;
+    private Menu toolbarMenu;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        toolbar = findViewById(R.id.toolbar);
-        //set it as the supportActionBar
-        setSupportActionBar(toolbar);
-        //getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 
 
         super.onCreate(savedInstanceState);
@@ -92,19 +91,25 @@ public class NewWorkoutActivity extends AppCompatActivity {
 
         });
 
+        toolbar = findViewById(R.id.toolbar);
+        //set it as the supportActionBar
+        setSupportActionBar(toolbar);
+        //getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
+        Log.e("TAG", "onCreateOptionsMenu called");
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.action_bar, menu);
         //get a reference to the adding new workout button
         MenuItem newWorkoutItem = menu.findItem(R.id.action_newWorkout);
         //set it to invisible
         newWorkoutItem.setVisible(false);
+        toolbarMenu = menu;
 
 
         return true;
@@ -119,16 +124,19 @@ public class NewWorkoutActivity extends AppCompatActivity {
                 return true;
             case R.id.action_saveWorkout:
                 //grab values
-                workInt = Integer.parseInt(workTime.getText().toString());
-                restInt = Integer.parseInt(restTime.getText().toString());
-                cycleInt = Integer.parseInt(cycleTime.getText().toString());
-                setsInt = Integer.parseInt(setsTime.getText().toString());
-                cooldownInt = Integer.parseInt(cooldownTime.getText().toString());
+                try {
+                    workInt = Integer.parseInt(workTime.getText().toString());
+                    restInt = Integer.parseInt(restTime.getText().toString());
+                    cycleInt = Integer.parseInt(cycleTime.getText().toString());
+                    setsInt = Integer.parseInt(setsTime.getText().toString());
+                    cooldownInt = Integer.parseInt(cooldownTime.getText().toString());
+                } catch (Exception e) {
+                    Toast.makeText(this, R.string.input_warning, Toast.LENGTH_LONG).show();
+                }
 
-                id = "newWorkout";
 
-                Workout myworkout = new Workout(id, workInt, restInt, cooldownInt, setsInt, cycleInt);
-                openPopUpActivity();
+                Workout myWorkout = new Workout(workInt, restInt, cooldownInt, setsInt, cycleInt);
+                openPopUpActivity(myWorkout);
 
 
                 return true;
@@ -137,8 +145,9 @@ public class NewWorkoutActivity extends AppCompatActivity {
         }
     }
 
-    public void openPopUpActivity() {
+    public void openPopUpActivity(Workout myWorkout) {
         Intent intent = new Intent(NewWorkoutActivity.this, PopUpTextActivity.class);
+        intent.putExtra(EXTRA_WORKOUT, myWorkout);
         startActivity(intent);
     }
 
@@ -172,6 +181,8 @@ public class NewWorkoutActivity extends AppCompatActivity {
             //If they are not empty then go to the next activity
             startButton.setEnabled(!testWorkout.isEmpty() && !testRestTime.isEmpty()
                     && !testCycle.isEmpty() && !testSetsTime.isEmpty() && !testCooldown.isEmpty());
+
+
         }
 
         @Override

@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_WORKOUTS = "com.example1.workoutapp1.EXTRA_WORKOUTS";
     public static final String SIMPLE_WORKOUTS = "simple_workouts";
+
 
 
     @Override
@@ -58,12 +62,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        //TODO: Eventually this needs to be deleted, and the files should be written to upon saving a workout instead.
         file = new File(this.getFilesDir(), SIMPLE_WORKOUTS);
-//        writeToFile("Test1,20,10,5,2,1", this);
-//        writeToFile("Test2,10,5,2,1,5", this);
-//        writeToFile("Test3,1,1,2,3,5", this);
-
 
         //read in saved workouts from internal storage
         populateWorkoutArray();
@@ -71,6 +70,33 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         //set it as the supportActionBar
         setSupportActionBar(toolbar);
+    }
+
+
+    //launch navigation bar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.bottom_nav_bar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_homeButton:
+                //do nothing
+                return true;
+            case R.id.nav_newWorkout:
+                openNewWorkoutScreen();
+
+                return true;
+            case R.id.nav_SavedWorkouts:
+                openSavedScreen();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void openNewWorkoutScreen() {

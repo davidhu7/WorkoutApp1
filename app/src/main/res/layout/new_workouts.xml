@@ -9,6 +9,8 @@
 
     <include layout="@layout/tool_bar"></include>
 
+    <include layout="@layout/bottom_nav_layout"></include>
+
     <TextView
         android:id="@+id/workTimeText"
         android:layout_width="wrap_content"

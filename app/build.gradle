@@ -14,6 +14,15 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    allprojects {
+        repositories {
+            jcenter()
+            maven {
+                url "https://maven.google.com"
+            }
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -34,4 +43,8 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.android.support:cardview-v7:28.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.android.support:design:28.0.0'
+
+
+
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:title="New Workout"
+        android:id="@+id/nav_newWorkout"
+        android:icon="@drawable/ic_workout_add_24px"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="3">
+
+
+    </item>
+
+    <item
+        android:title="Saved Workouts"
+        android:id="@+id/nav_SavedWorkouts"
+        android:icon="@drawable/ic_folder_24px"
+        android:iconTint="@color/colorPrimary"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="1">
+
+    </item>
+
+    <item
+        android:title="Home"
+        android:id="@+id/nav_homeButton"
+        android:icon="@drawable/ic_home_24px"
+        android:iconTint="@color/colorPrimary"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="2">
+
+    </item>
+
+</menu>

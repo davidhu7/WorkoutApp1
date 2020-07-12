@@ -8,6 +8,8 @@
 
     <include layout="@layout/tool_bar"></include>
 
+    <include layout="@layout/bottom_nav_layout"></include>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

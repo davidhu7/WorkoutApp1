@@ -119,7 +119,7 @@ public class NewWorkoutActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_newWorkout:
-
+                //button should be hidden
 
                 return true;
             case R.id.action_saveWorkout:
@@ -130,15 +130,12 @@ public class NewWorkoutActivity extends AppCompatActivity {
                     cycleInt = Integer.parseInt(cycleTime.getText().toString());
                     setsInt = Integer.parseInt(setsTime.getText().toString());
                     cooldownInt = Integer.parseInt(cooldownTime.getText().toString());
+                    Workout myWorkout = new Workout(workInt, restInt, cooldownInt, setsInt, cycleInt);
+                    openPopUpActivity(myWorkout);
                 } catch (Exception e) {
                     Toast.makeText(this, R.string.input_warning, Toast.LENGTH_LONG).show();
+
                 }
-
-
-                Workout myWorkout = new Workout(workInt, restInt, cooldownInt, setsInt, cycleInt);
-                openPopUpActivity(myWorkout);
-
-
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

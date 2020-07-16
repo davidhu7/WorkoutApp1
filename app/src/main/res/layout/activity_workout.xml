@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".WorkoutActivity">
 
-    <include layout="@layout/bottom_nav_layout"></include>
 
     <TextView
         android:id="@+id/Timer"

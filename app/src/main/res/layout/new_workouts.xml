@@ -7,9 +7,8 @@
     tools:context=".NewWorkoutActivity">
 
 
-    <include layout="@layout/tool_bar"></include>
+    <include layout="@layout/tool_bar" />
 
-    <include layout="@layout/bottom_nav_layout"></include>
 
     <TextView
         android:id="@+id/workTimeText"
@@ -82,6 +81,7 @@
         android:layout_height="60dp"
         android:inputType="number"
         android:hint = "@string/hint"
+        android:autofillHints="@string/hint"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.942"
@@ -110,6 +110,7 @@
         android:layout_height="60dp"
         android:inputType="number"
         android:hint = "@string/hint"
+        android:autofillHints="@string/hint"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.928"
@@ -150,7 +151,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/startWorkout"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

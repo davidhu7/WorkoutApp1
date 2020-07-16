@@ -1,5 +1,6 @@
 package com.example.workoutapp1;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -17,6 +18,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -213,5 +216,6 @@ public class NewWorkoutActivity extends AppCompatActivity {
 
         }
 
-    }
+
+}
 

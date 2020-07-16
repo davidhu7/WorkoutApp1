@@ -1,5 +1,6 @@
 package com.example.workoutapp1;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -13,6 +14,9 @@ import android.widget.Button;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -23,7 +27,7 @@ import java.util.Scanner;
 public class MainActivity extends AppCompatActivity {
     private Button savedBtn;
     private Button startBtn;
-    private int numLines;
+
     Toolbar toolbar;
 
     public ArrayList<Workout> workouts = new ArrayList<>();
@@ -39,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         //start a new workout button
         startBtn = findViewById(R.id.startNewButton);
         startBtn.setOnClickListener(new View.OnClickListener() {
@@ -48,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
                 openNewWorkoutScreen();
             }
         });
-
-
         //saved workouts button
         savedBtn = findViewById(R.id.savedButton);
         savedBtn.setOnClickListener(new View.OnClickListener() {
@@ -60,16 +61,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
-
-
         file = new File(this.getFilesDir(), SIMPLE_WORKOUTS);
-
         //read in saved workouts from internal storage
         populateWorkoutArray();
-
         toolbar = findViewById(R.id.toolbar);
         //set it as the supportActionBar
         setSupportActionBar(toolbar);
+
     }
 
 
@@ -81,23 +79,25 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.nav_homeButton:
-                //do nothing
-                return true;
-            case R.id.nav_newWorkout:
-                openNewWorkoutScreen();
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.nav_homeButton:
+//                //do nothing
+//                return true;
+//            case R.id.nav_newWorkout:
+//                openNewWorkoutScreen();
+//
+//                return true;
+//            case R.id.nav_SavedWorkouts:
+//                openSavedScreen();
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
-                return true;
-            case R.id.nav_SavedWorkouts:
-                openSavedScreen();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+
 
     public void openNewWorkoutScreen() {
         Intent intentNewWorkoutScreen = new Intent(this, NewWorkoutActivity.class);
@@ -132,33 +132,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
-    /**
-     * Method writes to main SIMPLE_WORKOUTS file.
-     *
-     * @param data
-     * @param context
-     */
-    public void writeToFile(String data, Context context) {
-        //String existing = readFromFile(context);
-        try (BufferedWriter fos = new BufferedWriter(new FileWriter(context.getFileStreamPath(SIMPLE_WORKOUTS), true))) {
-
-            fos.write(data + "\n");
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
-
-
-
-
-
 
 
 

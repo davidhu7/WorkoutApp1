@@ -1,5 +1,6 @@
 package com.example.workoutapp1;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -21,11 +22,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import org.w3c.dom.Text;
 
 import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class SavedWorkoutsActivity extends AppCompatActivity {
 
@@ -33,6 +37,7 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
     private CardView[] cardViews;
     private Workout[] workouts;
     private Toolbar toolbar;
+
 
     private LinearLayout.LayoutParams params;
     private ViewGroup.LayoutParams cardParams;
@@ -44,11 +49,6 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.saved_workouts);
-
-        //populateWorkoutArray();
-
-
-
         //get intent from mainactivity
         Intent intent = getIntent();
         //obtain the arrayList of workouts from the Main Activity
@@ -56,21 +56,17 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
         workouts = new Workout[parcelableArrayExtra.size()];
         //copy the ArrayList to our workouts array
         try {
-            System.arraycopy(parcelableArrayExtra.toArray(), 0, workouts, 0, parcelableArrayExtra.size());
+            System.arraycopy(Objects.requireNonNull(parcelableArrayExtra.toArray()), 0, workouts, 0, parcelableArrayExtra.size());
         } catch (Exception e) {
             e.printStackTrace();
         }
         //create a reference for our LinearLayout
         sLinearLayout = findViewById(R.id.viewList);
-        //create a reference to our Toolbar
+//        //create a reference to our Toolbar
         toolbar = findViewById(R.id.toolbar);
         //set it as the supportActionBar
         setSupportActionBar(toolbar);
-
-
-
-
-
+        //set a listener for the nav view at the bottom of the screen
 
         // Set the CardView layoutParams
         params = new LinearLayout.LayoutParams(
@@ -79,7 +75,6 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
         );
         //set margins for the cardviews
         params.setMargins(0, 10, 0, 40);
-
         populateCardViews(); //fill the cardview array
         populateLayout();   //fill the layout with cardviews
 
@@ -92,10 +87,7 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.action_bar, menu);
         MenuItem item = menu.findItem(R.id.action_saveWorkout);
-        //hide save workout button
         item.setVisible(false);
-
-
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -129,7 +121,7 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
 
             TextView tv = new TextView(this);
             tv.setLayoutParams(params);
-            tv.setText("Name: "+ workouts[i].getName());
+            tv.setText(workouts[i].getName());
             tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
             tv.setTextColor(Color.WHITE);
             tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -170,4 +162,8 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
     }
 
 
+    public void openNewWorkoutScreen() {
+        Intent intentNewWorkoutScreen = new Intent(this, NewWorkoutActivity.class);
+        startActivity(intentNewWorkoutScreen);
+    }
 }

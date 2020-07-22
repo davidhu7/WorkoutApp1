@@ -1,15 +1,12 @@
 package com.example.workoutapp1;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,19 +14,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Space;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import org.w3c.dom.Text;
 
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class SavedWorkoutsActivity extends AppCompatActivity {
@@ -40,11 +31,9 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
     private LinearLayout sLinearLayout;
     private CardView[] cardViews;
     private ArrayList<Workout> workouts = new ArrayList<>();
-    private Toolbar toolbar;
 
 
     private LinearLayout.LayoutParams params;
-    private ViewGroup.LayoutParams cardParams;
     private File file;
 
 
@@ -70,7 +59,7 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
         //create a reference for our LinearLayout
         sLinearLayout = findViewById(R.id.viewList);
 //        //create a reference to our Toolbar
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         //set it as the supportActionBar
         setSupportActionBar(toolbar);
         //set a listener for the nav view at the bottom of the screen

@@ -1,9 +1,7 @@
 package com.example.workoutapp1;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -19,11 +17,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class NewWorkoutActivity extends AppCompatActivity {
     /*
@@ -41,20 +35,13 @@ public class NewWorkoutActivity extends AppCompatActivity {
     private EditText cycleTime;
     private EditText setsTime;
     private EditText cooldownTime;
-    //Setting variables to pass onto the next activity
-    private String id;
-    private int totalTime;
     private int workInt;
     private int restInt;
     private int cycleInt;
     private int setsInt;
     private int cooldownInt;
-    private Button menuButton;
-    private Button homeButton;
     private Button startButton;
 
-    private Toolbar toolbar;
-    private Menu toolbarMenu;
 
 
 
@@ -96,7 +83,7 @@ public class NewWorkoutActivity extends AppCompatActivity {
 
         });
 
-        homeButton = findViewById(R.id.Home_button);
+        Button homeButton = findViewById(R.id.Home_button);
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,7 +92,7 @@ public class NewWorkoutActivity extends AppCompatActivity {
             }
         });
 
-        menuButton = findViewById(R.id.Menu_button);
+        Button menuButton = findViewById(R.id.Menu_button);
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,8 +101,7 @@ public class NewWorkoutActivity extends AppCompatActivity {
         });
 
 
-
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         //set it as the supportActionBar
         setSupportActionBar(toolbar);
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -133,7 +119,6 @@ public class NewWorkoutActivity extends AppCompatActivity {
         MenuItem newWorkoutItem = menu.findItem(R.id.action_newWorkout);
         //set it to invisible
         newWorkoutItem.setVisible(false);
-        toolbarMenu = menu;
 
 
         return true;
@@ -234,7 +219,8 @@ public class NewWorkoutActivity extends AppCompatActivity {
         setsInt = Integer.parseInt(setsTime.getText().toString());
         cooldownInt = Integer.parseInt(cooldownTime.getText().toString());
 
-        id = "newWorkout";
+        //Setting variables to pass onto the next activity
+        String id = "newWorkout";
 
         Workout myworkout = new Workout(id, workInt, restInt, cooldownInt, setsInt, cycleInt);
         /*

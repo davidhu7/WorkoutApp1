@@ -1,32 +1,22 @@
 package com.example.workoutapp1;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
-    private Button savedBtn;
-    private Button startBtn;
 
     Toolbar toolbar;
 
@@ -43,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //start a new workout button
-        startBtn = findViewById(R.id.startNewButton);
+        Button startBtn = findViewById(R.id.startNewButton);
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //saved workouts button
-        savedBtn = findViewById(R.id.savedButton);
+        Button savedBtn = findViewById(R.id.savedButton);
         savedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

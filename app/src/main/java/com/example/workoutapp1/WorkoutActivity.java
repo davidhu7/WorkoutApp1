@@ -44,6 +44,7 @@ public class WorkoutActivity extends AppCompatActivity {
         countdown = findViewById(R.id.Timer);
         exercise = findViewById(R.id.Exercise);
         start_pause = findViewById(R.id.Start_Pause);
+
         timeLeft = workTime * 1000;
         updateTime();
         isWork = true;

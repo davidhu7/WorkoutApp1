@@ -49,6 +49,8 @@ public class NewWorkoutActivity extends AppCompatActivity {
     private int cycleInt;
     private int setsInt;
     private int cooldownInt;
+    private Button menuButton;
+    private Button homeButton;
     private Button startButton;
 
     private Toolbar toolbar;
@@ -93,6 +95,25 @@ public class NewWorkoutActivity extends AppCompatActivity {
 
 
         });
+
+        homeButton = findViewById(R.id.Home_button);
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openHomeScreen();
+
+            }
+        });
+
+        menuButton = findViewById(R.id.Menu_button);
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openSavedScreen();
+            }
+        });
+
+
 
         toolbar = findViewById(R.id.toolbar);
         //set it as the supportActionBar
@@ -145,23 +166,36 @@ public class NewWorkoutActivity extends AppCompatActivity {
         }
     }
 
+    public void openSavedScreen() {
+        Intent intentOpenSavedScreen = new Intent(this, SavedWorkoutsActivity.class);
+//        intentOpenSavedScreen.putExtra(EXTRA_WORKOUTS, workouts);
+
+        startActivity(intentOpenSavedScreen);
+    }
+
     public void openPopUpActivity(Workout myWorkout) {
         Intent intent = new Intent(NewWorkoutActivity.this, PopUpTextActivity.class);
         intent.putExtra(EXTRA_WORKOUT, myWorkout);
         startActivity(intent);
     }
 
-    public void writeToFile(String data, Context context) {
-        //String existing = readFromFile(context);
-        try (BufferedWriter fos = new BufferedWriter(new FileWriter(context.getFileStreamPath(MainActivity.SIMPLE_WORKOUTS), true))) {
-
-            fos.write(data + "\n");
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void openHomeScreen() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        this.finish();
     }
+
+//    public void writeToFile(String data, Context context) {
+//        //String existing = readFromFile(context);
+//        try (BufferedWriter fos = new BufferedWriter(new FileWriter(context.getFileStreamPath(MainActivity.SIMPLE_WORKOUTS), true))) {
+//
+//            fos.write(data + "\n");
+//
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
     //This method makes sure the boxes all have an input before continuing

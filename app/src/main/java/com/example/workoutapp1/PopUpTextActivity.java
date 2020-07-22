@@ -40,7 +40,7 @@ public class PopUpTextActivity extends AppCompatActivity {
         workoutNameEditText.addTextChangedListener(checkInput);
 
 
-        file = new File(this.getFilesDir(), MainActivity.SIMPLE_WORKOUTS);
+        file = new File(this.getFilesDir(), SavedWorkoutsActivity.SIMPLE_WORKOUTS);
 
 
 
@@ -94,7 +94,7 @@ public class PopUpTextActivity extends AppCompatActivity {
 
     public void writeToFile(String data, Context context) {
         //String existing = readFromFile(context);
-        try (BufferedWriter fos = new BufferedWriter(new FileWriter(context.getFileStreamPath(MainActivity.SIMPLE_WORKOUTS), true))) {
+        try (BufferedWriter fos = new BufferedWriter(new FileWriter(context.getFileStreamPath(SavedWorkoutsActivity.SIMPLE_WORKOUTS), true))) {
 
             fos.write(data + "\n");
 

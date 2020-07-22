@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
     public File file;
 
     public static final String EXTRA_WORKOUTS = "com.example1.workoutapp1.EXTRA_WORKOUTS";
-    public static final String SIMPLE_WORKOUTS = "simple_workouts";
 
 
 
@@ -61,9 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
-        file = new File(this.getFilesDir(), SIMPLE_WORKOUTS);
         //read in saved workouts from internal storage
-        populateWorkoutArray();
         toolbar = findViewById(R.id.toolbar);
         //set it as the supportActionBar
         setSupportActionBar(toolbar);
@@ -106,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void openSavedScreen() {
         Intent intentOpenSavedScreen = new Intent(this, SavedWorkoutsActivity.class);
-        intentOpenSavedScreen.putExtra(EXTRA_WORKOUTS, workouts);
+//        intentOpenSavedScreen.putExtra(EXTRA_WORKOUTS, workouts);
 
         startActivity(intentOpenSavedScreen);
     }

@@ -30,17 +30,22 @@ import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class SavedWorkoutsActivity extends AppCompatActivity {
 
+    public static final String SIMPLE_WORKOUTS = "simple_workouts";
+
+
     private LinearLayout sLinearLayout;
     private CardView[] cardViews;
-    private Workout[] workouts;
+    private ArrayList<Workout> workouts = new ArrayList<>();
     private Toolbar toolbar;
 
 
     private LinearLayout.LayoutParams params;
     private ViewGroup.LayoutParams cardParams;
+    private File file;
 
 
 
@@ -49,17 +54,19 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.saved_workouts);
+        file = new File(this.getFilesDir(), SIMPLE_WORKOUTS);
+        populateWorkoutArray();
         //get intent from mainactivity
-        Intent intent = getIntent();
-        //obtain the arrayList of workouts from the Main Activity
-        ArrayList<Parcelable> parcelableArrayExtra = intent.getParcelableArrayListExtra(MainActivity.EXTRA_WORKOUTS);
-        workouts = new Workout[parcelableArrayExtra.size()];
-        //copy the ArrayList to our workouts array
-        try {
-            System.arraycopy(Objects.requireNonNull(parcelableArrayExtra.toArray()), 0, workouts, 0, parcelableArrayExtra.size());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        Intent intent = getIntent();
+//        //obtain the arrayList of workouts from the Main Activity
+//        ArrayList<Parcelable> parcelableArrayExtra = intent.getParcelableArrayListExtra(MainActivity.EXTRA_WORKOUTS);
+//        workouts = new Workout[parcelableArrayExtra.size()];
+//        //copy the ArrayList to our workouts array
+//        try {
+//            System.arraycopy(Objects.requireNonNull(parcelableArrayExtra.toArray()), 0, workouts, 0, parcelableArrayExtra.size());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         //create a reference for our LinearLayout
         sLinearLayout = findViewById(R.id.viewList);
 //        //create a reference to our Toolbar
@@ -100,8 +107,8 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
     }
     //TODO: Make the textView display more meaningful information
     private void populateCardViews() {
-        cardViews = new CardView[workouts.length];
-        for(int i = 0; i < workouts.length; i++) {
+        cardViews = new CardView[workouts.size()];
+        for (int i = 0; i < workouts.size(); i++) {
             CardView card = new CardView(this);
             card.setClickable(true);
             card.setLayoutParams(params);
@@ -121,7 +128,7 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
 
             TextView tv = new TextView(this);
             tv.setLayoutParams(params);
-            tv.setText(workouts[i].getName());
+            tv.setText(workouts.get(i).getName());
             tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
             tv.setTextColor(Color.WHITE);
             tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -140,9 +147,29 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
 
 
     }
+
+    public void populateWorkoutArray() {
+
+        try {
+            Scanner fileIn = new Scanner(file);
+            String s;
+            while (fileIn.hasNextLine()) {
+                s = fileIn.nextLine();
+                String[] split = s.split(",");
+                Workout w = new Workout(split[0], Integer.parseInt(split[1]), Integer.parseInt(split[2]), Integer.parseInt(split[3]), Integer.parseInt(split[4]), Integer.parseInt(split[5]));
+                workouts.add(w);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
     public void openWorkout(int workoutIndex) {
         Intent intent = new Intent(this, WorkoutActivity.class);
-        intent.putExtra(NewWorkoutActivity.EXTRA_WORKOUT, workouts[workoutIndex] );
+        intent.putExtra(NewWorkoutActivity.EXTRA_WORKOUT, workouts.get(workoutIndex));
         startActivity(intent);
     }
 
@@ -150,8 +177,7 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_newWorkout:
-                Intent intentNewWorkoutScreen = new Intent(this, NewWorkoutActivity.class);
-                startActivity(intentNewWorkoutScreen);
+                openNewWorkoutScreen();
                 return true;
             case R.id.action_saveWorkout:
 

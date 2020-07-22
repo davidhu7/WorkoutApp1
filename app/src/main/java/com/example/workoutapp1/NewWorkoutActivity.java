@@ -119,8 +119,6 @@ public class NewWorkoutActivity extends AppCompatActivity {
         MenuItem newWorkoutItem = menu.findItem(R.id.action_newWorkout);
         //set it to invisible
         newWorkoutItem.setVisible(false);
-
-
         return true;
     }
 
@@ -218,11 +216,10 @@ public class NewWorkoutActivity extends AppCompatActivity {
         cycleInt = Integer.parseInt(cycleTime.getText().toString());
         setsInt = Integer.parseInt(setsTime.getText().toString());
         cooldownInt = Integer.parseInt(cooldownTime.getText().toString());
-
         //Setting variables to pass onto the next activity
         String id = "newWorkout";
 
-        Workout myworkout = new Workout(id, workInt, restInt, cooldownInt, setsInt, cycleInt);
+        Workout myWorkout = new Workout(id, workInt, restInt, cooldownInt, setsInt, cycleInt);
         /*
         intentOpenWorkout.putExtra(Extra_work,workInt);
         intentOpenWorkout.putExtra(Extra_rest,restInt);
@@ -231,7 +228,7 @@ public class NewWorkoutActivity extends AppCompatActivity {
         intentOpenWorkout.putExtra(Extra_cycles,cycleInt);
         */
         //Sends the data to the next activity
-        intentOpenWorkout.putExtra(EXTRA_WORKOUT, myworkout);
+        intentOpenWorkout.putExtra(EXTRA_WORKOUT, myWorkout);
         startActivity(intentOpenWorkout);
 
         }

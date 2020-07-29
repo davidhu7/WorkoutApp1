@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--    <item-->
+    <!--        android:id="@+id/create_new_title"-->
+    <!--        android:title="@string/createNew"-->
+    <!--        app:showAsAction="always"-->
+    <!--        >-->
+
+    <!--    </item>-->
+
+    <item
+        android:id="@+id/new_simple_workout"
+        android:title="@string/simpleWorkout"
+        app:showAsAction="ifRoom"
+        android:iconTint="@color/colorPrimary">
+
+    </item>
+
+    <item
+        android:id="@+id/new_complex_workout"
+        android:title="@string/complexWorkout"
+        app:showAsAction="ifRoom"
+        android:iconTint="@color/colorPrimary">
+
+    </item>
+
+
+</menu>

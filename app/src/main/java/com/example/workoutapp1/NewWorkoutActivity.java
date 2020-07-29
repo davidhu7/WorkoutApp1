@@ -83,14 +83,14 @@ public class NewWorkoutActivity extends AppCompatActivity {
 
         });
 
-        Button homeButton = findViewById(R.id.Home_button);
-        homeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openHomeScreen();
-
-            }
-        });
+//        Button homeButton = findViewById(R.id.Home_button);
+//        homeButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openHomeScreen();
+//
+//            }
+//        });
 
         Button menuButton = findViewById(R.id.Menu_button);
         menuButton.setOnClickListener(new View.OnClickListener() {
@@ -152,8 +152,8 @@ public class NewWorkoutActivity extends AppCompatActivity {
     public void openSavedScreen() {
         Intent intentOpenSavedScreen = new Intent(this, SavedWorkoutsActivity.class);
 //        intentOpenSavedScreen.putExtra(EXTRA_WORKOUTS, workouts);
-
         startActivity(intentOpenSavedScreen);
+        this.finish(); //end current activity
     }
 
     public void openPopUpActivity(Workout myWorkout) {

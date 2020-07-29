@@ -77,9 +77,6 @@ public class WorkoutActivity extends AppCompatActivity {
             timeLeft = workT;
             updateTime();
             startTime();
-
-
-
             //timeLeft = restT;
             //updateTime();
             //startTime();

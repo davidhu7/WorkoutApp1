@@ -12,9 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".NewComplexWorkoutActivity"></activity>
         <activity
             android:name=".PopUpTextActivity"
-            android:theme="@style/AppTheme.PopUpTheme"></activity>
+            android:theme="@style/AppTheme.PopUpTheme" />
         <activity android:name=".WorkoutActivity" />
         <activity android:name=".NewWorkoutActivity" />
         <activity android:name=".SavedWorkoutsActivity" />

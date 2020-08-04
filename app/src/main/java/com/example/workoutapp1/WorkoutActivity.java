@@ -74,7 +74,10 @@ public class WorkoutActivity extends AppCompatActivity {
         counter = sets * cycles;
         exerciseNum = 1;
         isSet = 1;
-        exercise.setText("Exercise " + exerciseNum);
+
+        //one time calls
+        exercise.setText(dataSet.get(0));
+        //nextActivity(); //called once to fit the schedule
 
         start_pause.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,10 +148,8 @@ public class WorkoutActivity extends AppCompatActivity {
                         counter--;
 
                     }
-                    dataIndex++;
-                    dataSet.remove(0);
-                    recyclerView.removeViewAt(0); //after each exercise, remove
-                    mAdapter.notifyDataSetChanged();
+                    //dataIndex++; //go to the next data spot
+                    nextActivity(); //goes to the next activity
                     startTime();
 
                 }
@@ -209,6 +210,14 @@ public class WorkoutActivity extends AppCompatActivity {
 
             }
         };
+    }
+
+    public void nextActivity() {
+        dataSet.remove(0); //remove the first item in the list
+        recyclerView.removeViewAt(0); //after each exercise, remove it
+        mAdapter.notifyItemRemoved(0);
+        mAdapter.notifyItemRangeChanged(0, dataSet.size());
+        mAdapter.notifyDataSetChanged(); //update it
     }
 
 }

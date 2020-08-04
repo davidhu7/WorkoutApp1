@@ -1,6 +1,8 @@
 package com.example.workoutapp1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -16,6 +18,10 @@ public class WorkoutActivity extends AppCompatActivity {
     private TextView countdown;
     private TextView exercise;
     private Button start_pause;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+
     private boolean timerRunning;
     private long timeLeft;
     private int isSet;
@@ -27,20 +33,34 @@ public class WorkoutActivity extends AppCompatActivity {
     private int exerciseNum;
     private int sets;
     private int cycles;
+    private Workout workoutIn;
+    private String[] dataSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout);
-
         Intent getWorkout = getIntent();
-        Workout newWorkout = (Workout)getWorkout.getParcelableExtra(NewWorkoutActivity.EXTRA_WORKOUT);
+        workoutIn = getWorkout.getParcelableExtra(NewWorkoutActivity.EXTRA_WORKOUT);
+        dataSet = workoutIn.workoutScheduleAsArray();
 
-        workTime = newWorkout.getWorkTime();
-        restTime = newWorkout.getRestTime();
-        cooldownTime = newWorkout.getCooldownTime();
-        sets = newWorkout.getSets();
-        cycles = newWorkout.getCycles();
+
+        recyclerView = findViewById(R.id.recycler_view);
+        //set fixed size
+        recyclerView.setHasFixedSize(true);
+        // use linear layout manager
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        //specify adapter
+        mAdapter = new WorkoutActivityAdapter(dataSet);
+        recyclerView.setAdapter(mAdapter);
+
+
+        workTime = workoutIn.getWorkTime();
+        restTime = workoutIn.getRestTime();
+        cooldownTime = workoutIn.getCooldownTime();
+        sets = workoutIn.getSets();
+        cycles = workoutIn.getCycles();
         countdown = findViewById(R.id.Timer);
         exercise = findViewById(R.id.Exercise);
         start_pause = findViewById(R.id.Start_Pause);

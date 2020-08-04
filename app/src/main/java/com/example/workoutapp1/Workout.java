@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import androidx.cardview.widget.CardView;
 
@@ -18,7 +19,7 @@ public class Workout implements Parcelable {
     private int cycles;
 
 
-    public Workout(String name, int wTime, int rTime, int cTime, int sts, int cycls ) {
+    Workout(String name, int wTime, int rTime, int cTime, int sts, int cycls) {
         this.name = name;
         workTime = wTime;
         restTime = rTime;
@@ -27,7 +28,7 @@ public class Workout implements Parcelable {
         cycles = cycls;
     }
 
-    public Workout(int w, int r, int c, int s, int cycls) {
+    Workout(int w, int r, int c, int s, int cycls) {
         workTime = w;
         restTime = r;
         cooldownTime = c;
@@ -36,7 +37,7 @@ public class Workout implements Parcelable {
     }
 
 
-    protected Workout(Parcel in) {
+    private Workout(Parcel in) {
         name = in.readString();
         workTime = in.readInt();
         restTime = in.readInt();
@@ -57,11 +58,11 @@ public class Workout implements Parcelable {
         }
     };
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
-    public int getWorkTime() {
+    int getWorkTime() {
         return workTime;
     }
     public int getRestTime() {
@@ -100,5 +101,24 @@ public class Workout implements Parcelable {
         dest.writeInt(cooldownTime);
         dest.writeInt(sets);
         dest.writeInt(cycles);
+    }
+
+    /**
+     * This method is meant for displaying the full schedule of the workout as an Array of Strings.
+     */
+    public String[] workoutScheduleAsArray() {
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < sets; i++) {
+            for (int j = 0; j < cycles; j++) { //repeat for the amount of cycles in a set
+                list.add("Exercise: " + workTime); //display the time to workout
+                list.add("Rest: " + restTime); //add the time to rest afterwards
+            }
+            list.add("Rest between sets: " + cooldownTime); //after each set, add the cooldown time.
+        }
+        String[] s = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) { //convert to Array of strings.
+            s[i] = list.get(i);
+        }
+        return s;
     }
 }

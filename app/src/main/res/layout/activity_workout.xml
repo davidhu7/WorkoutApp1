@@ -12,13 +12,15 @@
         android:layout_width="150dp"
         android:layout_height="60dp"
         android:text="@string/StartTime"
+        android:textAlignment="center"
         android:textSize="50sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/Exercise"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.421" />
+        app:layout_constraintVertical_bias="0.228"
+        android:layout_margin="40dp" />
 
     <Button
         android:id="@+id/Start_Pause"
@@ -30,22 +32,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Timer"
-        android:layout_marginBottom="40dp"
-        app:layout_constraintVertical_bias="1.0"
-        android:layout_marginStart="40dp" />
+        android:layout_margin="40dp"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/Exercise"
         android:layout_width="150dp"
         android:layout_height="60dp"
         android:text="@string/Exercise"
+        android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/Timer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.506" />
+        app:layout_constraintTop_toBottomOf="@id/Timer"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="409dp"
+        android:layout_height="427dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="214dp"
+        android:textAlignment="center"
+        android:layout_margin="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Exercise"
+        app:layout_constraintBottom_toTopOf="@id/Start_Pause">
+
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class WorkoutActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private TextView countdown;
@@ -34,7 +36,8 @@ public class WorkoutActivity extends AppCompatActivity {
     private int sets;
     private int cycles;
     private Workout workoutIn;
-    private String[] dataSet;
+    private ArrayList<String> dataSet;
+    private int dataIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +108,7 @@ public class WorkoutActivity extends AppCompatActivity {
     }
 
     public void startTime(){
+        exercise.setText(dataSet.get(dataIndex)); //display next text
         countDownTimer = new CountDownTimer(timeLeft, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -117,6 +121,7 @@ public class WorkoutActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+
                 start_pause.setText("Start");
                 if(counter > 0) {
                     if(isWork) {
@@ -125,22 +130,27 @@ public class WorkoutActivity extends AppCompatActivity {
                     } else {
                         timeLeft = workTime * 1000;
                         isWork = true;
-                        if(counter-1 > 0) {
-                            if(isSet < sets) {
-                                exerciseNum++;
-                                exercise.setText("Exercise " + exerciseNum);
-                                isSet++;
-                            }
-                            else{
-                                isSet = 1;
-                                exerciseNum = 1;
-                                exercise.setText("Exercise " + exerciseNum);
-                            }
-                        }
+//                        if(counter-1 > 0) {
+//                            if(isSet < sets) {
+//                                exerciseNum++;
+//                                exercise.setText("Exercise " + exerciseNum);
+//                                isSet++;
+//                            }
+//                            else{
+//                                isSet = 1;
+//                                exerciseNum = 1;
+//                                exercise.setText("Exercise " + exerciseNum);
+//                            }
+                        //                       }
                         counter--;
-                    }
 
+                    }
+                    dataIndex++;
+                    dataSet.remove(0);
+                    recyclerView.removeViewAt(0); //after each exercise, remove
+                    mAdapter.notifyDataSetChanged();
                     startTime();
+
                 }
 
                 if(counter == 0){

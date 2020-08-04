@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import androidx.cardview.widget.CardView;
@@ -106,7 +107,7 @@ public class Workout implements Parcelable {
     /**
      * This method is meant for displaying the full schedule of the workout as an Array of Strings.
      */
-    public String[] workoutScheduleAsArray() {
+    public ArrayList<String> workoutScheduleAsArray() {
         ArrayList<String> list = new ArrayList<>();
         for (int i = 0; i < sets; i++) {
             for (int j = 0; j < cycles; j++) { //repeat for the amount of cycles in a set
@@ -115,10 +116,10 @@ public class Workout implements Parcelable {
             }
             list.add("Rest between sets: " + cooldownTime); //after each set, add the cooldown time.
         }
-        String[] s = new String[list.size()];
-        for (int i = 0; i < list.size(); i++) { //convert to Array of strings.
-            s[i] = list.get(i);
-        }
-        return s;
+//        String[] s = new String[list.size()];
+//        for (int i = 0; i < list.size(); i++) { //convert to Array of strings.
+//            s[i] = list.get(i);
+//        }
+        return list;
     }
 }

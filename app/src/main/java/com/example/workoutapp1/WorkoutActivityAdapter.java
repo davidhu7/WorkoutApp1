@@ -43,6 +43,7 @@ public class WorkoutActivityAdapter extends RecyclerView.Adapter<WorkoutActivity
         // Inflate the custom layout
         View view = inflater.inflate(R.layout.workout_item, parent, false);
 
+
         // Return a new holder instance
         return new MyViewHolder(view);
     }
@@ -55,6 +56,7 @@ public class WorkoutActivityAdapter extends RecyclerView.Adapter<WorkoutActivity
         holder.textView.setText(mDataset.get(position));
 
     }
+
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override

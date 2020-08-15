@@ -37,7 +37,7 @@ public class WorkoutActivity extends AppCompatActivity {
     private int cycles;
     private Workout workoutIn;
     private ArrayList<String> dataSet;
-    private int dataIndex = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,19 @@ public class WorkoutActivity extends AppCompatActivity {
         //specify adapter
         mAdapter = new WorkoutActivityAdapter(dataSet);
         recyclerView.setAdapter(mAdapter);
+
+        //creating ability to touch each item.
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(WorkoutActivity.this, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                jumpToActivity(position);
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+        }));
 
 
         workTime = workoutIn.getWorkTime();
@@ -111,7 +124,7 @@ public class WorkoutActivity extends AppCompatActivity {
     }
 
     public void startTime(){
-        exercise.setText(dataSet.get(dataIndex)); //display next text
+        exercise.setText(dataSet.get(0)); //display next text
         countDownTimer = new CountDownTimer(timeLeft, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -133,20 +146,7 @@ public class WorkoutActivity extends AppCompatActivity {
                     } else {
                         timeLeft = workTime * 1000;
                         isWork = true;
-//                        if(counter-1 > 0) {
-//                            if(isSet < sets) {
-//                                exerciseNum++;
-//                                exercise.setText("Exercise " + exerciseNum);
-//                                isSet++;
-//                            }
-//                            else{
-//                                isSet = 1;
-//                                exerciseNum = 1;
-//                                exercise.setText("Exercise " + exerciseNum);
-//                            }
-                        //                       }
                         counter--;
-
                     }
                     //dataIndex++; //go to the next data spot
                     nextActivity(); //goes to the next activity
@@ -194,30 +194,39 @@ public class WorkoutActivity extends AppCompatActivity {
     }
 
 
-    private void createCountDownTimer() {
 
-        countDownTimer = new CountDownTimer(timeLeft, 1000) {
-
-            @Override
-            public void onTick(long millisUntilFinished) {
-                timeLeft = millisUntilFinished;
-                updateTime();
-
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-        };
-    }
 
     public void nextActivity() {
-        dataSet.remove(0); //remove the first item in the list
-        recyclerView.removeViewAt(0); //after each exercise, remove it
-        mAdapter.notifyItemRemoved(0);
-        mAdapter.notifyItemRangeChanged(0, dataSet.size());
-        mAdapter.notifyDataSetChanged(); //update it
+        if (dataSet.size() > 0) {
+            dataSet.remove(0); //remove the first item in the list
+            recyclerView.removeViewAt(0); //after each exercise, remove it
+            mAdapter.notifyItemRemoved(0);
+            mAdapter.notifyItemRangeChanged(0, dataSet.size());
+            mAdapter.notifyDataSetChanged(); //update it
+        }
+    }
+
+    public void jumpToActivity(int position) {
+        countDownTimer.cancel();
+        for (int i = 0; i < position; i++) {
+            dataSet.remove(0);
+            recyclerView.removeViewAt(0);
+            mAdapter.notifyItemRemoved(0);
+            mAdapter.notifyItemRangeChanged(0, dataSet.size());
+            mAdapter.notifyDataSetChanged(); //update it
+            counter--;
+        }
+        //update the timeLeft
+        if (counter > 0) {
+            if (isWork) {
+                timeLeft = restTime * 1000;
+                isWork = false;
+            } else {
+                timeLeft = workTime * 1000;
+                isWork = true;
+            }
+        }
+        startTime();
     }
 
 }

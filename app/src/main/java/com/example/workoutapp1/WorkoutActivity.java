@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -152,9 +153,7 @@ public class WorkoutActivity extends AppCompatActivity {
                     nextActivity(); //goes to the next activity
                     startTime();
 
-                }
-
-                if(counter == 0){
+                } else if (counter == 0) {
                     timeLeft = cooldownTime * 1000;
                     exercise.setText("Cooldown");
                     updateTime();
@@ -207,7 +206,13 @@ public class WorkoutActivity extends AppCompatActivity {
     }
 
     public void jumpToActivity(int position) {
-        countDownTimer.cancel();
+        try {
+            countDownTimer.cancel();
+        } catch (Exception e) { //this would only occur if the timer hasn't been started yet
+            e.printStackTrace();
+        }
+
+
         for (int i = 0; i < position; i++) {
             dataSet.remove(0);
             recyclerView.removeViewAt(0);
@@ -225,8 +230,15 @@ public class WorkoutActivity extends AppCompatActivity {
                 timeLeft = workTime * 1000;
                 isWork = true;
             }
+            startTime();
+        } else if (counter == 0) {
+            timeLeft = cooldownTime * 1000;
+            exercise.setText("Cooldown");
+            updateTime();
+            startTime();
+            counter--;
         }
-        startTime();
+
     }
 
 }

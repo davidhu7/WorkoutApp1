@@ -103,7 +103,7 @@ public class NewWorkoutActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         //set it as the supportActionBar
-        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
@@ -115,7 +115,7 @@ public class NewWorkoutActivity extends AppCompatActivity {
         Log.e("TAG", "onCreateOptionsMenu called");
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.action_bar, menu);
-        //get a reference to the adding new workout button
+        //get a reference to the adding new workout roundedbutton
         MenuItem newWorkoutItem = menu.findItem(R.id.action_newWorkout);
         //set it to invisible
         newWorkoutItem.setVisible(false);
@@ -126,7 +126,7 @@ public class NewWorkoutActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_newWorkout:
-                //button should be hidden
+                //roundedbutton should be hidden
 
                 return true;
             case R.id.action_saveWorkout:

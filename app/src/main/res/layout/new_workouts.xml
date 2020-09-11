@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewWorkoutActivity">
+    tools:context=".NewWorkoutActivity"
+    android:theme="@style/AppTheme">
 
 
     <include layout="@layout/tool_bar" />
@@ -156,7 +157,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="40dp" />
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/roundedbutton" />
 
     <Button
         android:id="@+id/Menu_button"
@@ -166,7 +168,8 @@
         android:layout_marginBottom="40dp"
         android:drawableStart="@drawable/ic_list_24px"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/roundedbutton" />
 
     <!--    <Button-->
     <!--        android:id="@+id/Home_button"-->

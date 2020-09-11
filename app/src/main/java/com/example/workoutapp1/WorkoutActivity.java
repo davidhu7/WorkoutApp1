@@ -59,18 +59,18 @@ public class WorkoutActivity extends AppCompatActivity {
         mAdapter = new WorkoutActivityAdapter(dataSet);
         recyclerView.setAdapter(mAdapter);
 
-        //creating ability to touch each item.
-        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(WorkoutActivity.this, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                jumpToActivity(position);
-            }
-
-            @Override
-            public void onLongItemClick(View view, int position) {
-
-            }
-        }));
+//        //creating ability to touch each item.
+//        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(WorkoutActivity.this, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(View view, int position) {
+//                jumpToActivity(position);
+//            }
+//
+//            @Override
+//            public void onLongItemClick(View view, int position) {
+//
+//            }
+//        }));
 
 
         workTime = workoutIn.getWorkTime();
@@ -193,8 +193,6 @@ public class WorkoutActivity extends AppCompatActivity {
     }
 
 
-
-
     public void nextActivity() {
         if (dataSet.size() > 0) {
             dataSet.remove(0); //remove the first item in the list
@@ -205,40 +203,40 @@ public class WorkoutActivity extends AppCompatActivity {
         }
     }
 
-    public void jumpToActivity(int position) {
-        try {
-            countDownTimer.cancel();
-        } catch (Exception e) { //this would only occur if the timer hasn't been started yet
-            e.printStackTrace();
-        }
-
-
-        for (int i = 0; i < position; i++) {
-            dataSet.remove(0);
-            recyclerView.removeViewAt(0);
-            mAdapter.notifyItemRemoved(0);
-            mAdapter.notifyItemRangeChanged(0, dataSet.size());
-            mAdapter.notifyDataSetChanged(); //update it
-            counter--;
-        }
-        //update the timeLeft
-        if (counter > 0) {
-            if (isWork) {
-                timeLeft = restTime * 1000;
-                isWork = false;
-            } else {
-                timeLeft = workTime * 1000;
-                isWork = true;
-            }
-            startTime();
-        } else if (counter == 0) {
-            timeLeft = cooldownTime * 1000;
-            exercise.setText("Cooldown");
-            updateTime();
-            startTime();
-            counter--;
-        }
-
-    }
+//    public void jumpToActivity(int position) {
+//        try {
+//            countDownTimer.cancel();
+//        } catch (Exception e) { //this would only occur if the timer hasn't been started yet
+//            e.printStackTrace();
+//        }
+//
+//
+//        for (int i = 0; i < position; i++) {
+//            dataSet.remove(0);
+//            recyclerView.removeViewAt(0);
+//            mAdapter.notifyItemRemoved(0);
+//            mAdapter.notifyItemRangeChanged(0, dataSet.size());
+//            mAdapter.notifyDataSetChanged(); //update it
+//            counter--;
+//        }
+//        //update the timeLeft
+//        if (counter > 0) {
+//            if (isWork) {
+//                timeLeft = restTime * 1000;
+//                isWork = false;
+//            } else {
+//                timeLeft = workTime * 1000;
+//                isWork = true;
+//            }
+//            startTime();
+//        } else if (counter == 0) {
+//            timeLeft = cooldownTime * 1000;
+//            exercise.setText("Cooldown");
+//            updateTime();
+//            startTime();
+//            counter--;
+//        }
+//
+//    }
 
 }

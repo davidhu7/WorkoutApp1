@@ -9,10 +9,9 @@
         app:title="@string/appName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/AppTheme.ActionBarTheme"
+
         android:elevation="4dp"
         app:menu="@menu/action_bar"
         app:layout_constraintTop_toTopOf="parent" />

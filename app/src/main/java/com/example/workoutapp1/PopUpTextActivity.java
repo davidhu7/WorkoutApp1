@@ -81,7 +81,7 @@ public class PopUpTextActivity extends AppCompatActivity {
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             String s = workoutNameEditText.getText().toString();
-            confirmBtn.setEnabled(!s.isEmpty()); //enable button if something is in the editText
+            confirmBtn.setEnabled(!s.isEmpty()); //enable roundedbutton if something is in the editText
 
         }
 

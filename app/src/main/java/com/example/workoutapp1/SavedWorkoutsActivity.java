@@ -61,7 +61,7 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
 //        //create a reference to our Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         //set it as the supportActionBar
-        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
         //set a listener for the nav view at the bottom of the screen
 
         // Set the CardView layoutParams
@@ -106,7 +106,7 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
             // Set cardView content padding
             card.setContentPadding(20, 20, 20, 20);
             // Set a background color for CardView
-            card.setCardBackgroundColor(Color.BLACK);
+            card.setCardBackgroundColor(getColor(R.color.colorSecondary));
             // Set the CardView maximum elevation
             card.setMaxCardElevation(50);
             // Set CardView elevation

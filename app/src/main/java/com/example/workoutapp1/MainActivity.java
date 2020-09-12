@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //start a new workout button
+        //start a new workout roundedbutton
         Button startBtn = findViewById(R.id.startNewButton);
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 //  openNewWorkoutScreen();
             }
         });
-        //saved workouts button
+        //saved workouts roundedbutton
         Button savedBtn = findViewById(R.id.savedButton);
         savedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         //read in saved workouts from internal storage
         toolbar = findViewById(R.id.toolbar);
         //set it as the supportActionBar
-        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
     }
 
 

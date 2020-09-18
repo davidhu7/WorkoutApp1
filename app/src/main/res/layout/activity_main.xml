@@ -35,11 +35,11 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/Logo"
+        android:src="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_margin="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightiOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         />
 
     <Button

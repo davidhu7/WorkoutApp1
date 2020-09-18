@@ -47,10 +47,6 @@ public class NewWorkoutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_workouts);
         //Makes sure all of the boxes are filled in before moving onto the next

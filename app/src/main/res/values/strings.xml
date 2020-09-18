@@ -1,6 +1,7 @@
 <resources>
     <string name="appName">FlexTime</string>
-    <string name="newButton">New Workout</string>
+    <string name="subHeading">Workout Timer</string>
+    <string name="newButton">New</string>
     <string name="saveButton">Saved</string>
     <string name="companyName">ES4</string>
     <string name="workTimeText">Work Time</string>

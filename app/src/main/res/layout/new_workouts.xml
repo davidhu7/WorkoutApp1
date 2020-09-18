@@ -8,7 +8,7 @@
     android:theme="@style/AppTheme">
 
 
-    <include layout="@layout/tool_bar" />
+
 
 
     <TextView

@@ -62,7 +62,7 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         //set it as the supportActionBar
         //setSupportActionBar(toolbar);
-        //set a listener for the nav view at the bottom of the screen
+
 
         // Set the CardView layoutParams
         params = new LinearLayout.LayoutParams(
@@ -167,9 +167,10 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_newWorkout:
                 openNewWorkoutScreen();
+                this.finish();
                 return true;
             case R.id.action_saveWorkout:
-
+                //do nothing, option should not be available
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

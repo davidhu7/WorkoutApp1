@@ -38,6 +38,9 @@ public class WorkoutActivity extends AppCompatActivity {
     private int cycles;
     private Workout workoutIn;
     private ArrayList<String> dataSet;
+    //TODO: Add arrow buttons to be able to move to next activity / previous activity
+    //TODO: Make the display more aesthetic? Add symbols
+    //TODO: Notification bar and running in background once workout starts
 
 
     @Override

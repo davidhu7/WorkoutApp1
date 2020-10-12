@@ -94,7 +94,7 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
         }
 
     }
-    //TODO: Make the textView display more meaningful information
+
     private void populateCardViews() {
         cardViews = new CardView[workouts.size()];
         for (int i = 0; i < workouts.size(); i++) {
@@ -108,9 +108,9 @@ public class SavedWorkoutsActivity extends AppCompatActivity {
             // Set a background color for CardView
             card.setCardBackgroundColor(getColor(R.color.colorSecondary));
             // Set the CardView maximum elevation
-            card.setMaxCardElevation(50);
+            card.setMaxCardElevation(30);
             // Set CardView elevation
-            card.setCardElevation(50);
+            card.setCardElevation(30);
 
 
             // Initialize new TextView to put in CardView
